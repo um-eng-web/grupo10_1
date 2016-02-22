@@ -19,65 +19,54 @@ class Game
   end
 
   #accessor methods
-  def printGameId
+  def getGameId
     @gameId
   end
 
-  def printTeam1
+  def getTeam1
     @team1
   end
 
-  def printTeam2
+  def getTeam2
     @team2
   end
 
-  def printResult
+  def getResult
     @result
   end
 
-  def printOdds
+  def getOdds
     @odds
   end
 
-  def printGameCreator
+  def getGameCreator
     @gameCreator
   end
 
 
   #setter's
-  def setGameId(gId)
+  def setGameId=(gId)
     @gameId = gId
   end
 
-  def setTeam1(t1)
+  def setTeam1=(t1)
     @team1 = t1
   end
 
-  def setTeam2(t2)
+  def setTeam2=(t2)
     @team2
   end
 
-  def setResult(res)
+  def setResult=(res)
     @result = res
   end
 
-  def setOdds(odds)
+  def setOdds=(odds)
     @odds = odds
   end
 
-  def setGameCreator(gc)
+  def setGameCreator=(gc)
     @gameCreator = gc
-  end
-
-  #toString method
-  def to_s
-    puts "Game Id ::  #{@gameId}"
-    puts "Team1 :: #{@team1}"
-    puts "Team2 :: #{@team2}"
-    puts "Result :: #{@result}"
-    puts "Odds :: #{@odds}"
-    puts "Game Creator :: #{@gameCreator}"
-
   end
 
 end

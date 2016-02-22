@@ -20,61 +20,50 @@ class Bet
 
 
   #accessors
-  def printBetId
+  def getBetId
     @betId
   end
 
-  def printType
+  def getType
     @type
   end
 
-  def printState
+  def getState
     @state
   end
 
-  def printBetAmount
+  def getBetAmount
     @betAmount
   end
 
-  def printResult
+  def getResult
     @result
   end
 
-  def printOdd
+  def getOdd
     @odd
   end
 
 
   #setters
-  def setBetId(id)
+  def setBetId=(id)
     @betId = id
   end
 
-  def setType(type)
+  def setType=(type)
     @type = type
   end
 
-  def setState(state)
+  def setState=(state)
     @state = state
   end
 
-  def setResult(result)
+  def setResult=(result)
     @result = result
   end
 
-  def setOdd(odd)
+  def setOdd=(odd)
     @odd = odd
-  end
-
-
-  #toString method
-  def to_s
-    puts "Bet Id ::  #{@betId}"
-    puts "Type :: #{@type}"
-    puts "State :: #{@state}"
-    puts "Bet Amount :: #{@betAmount}"
-    puts "Result :: #{@result}"
-    puts "Odd :: #{@odd}"
   end
 
 end

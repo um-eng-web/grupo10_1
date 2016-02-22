@@ -44,7 +44,7 @@ class ControllerUser
   end
 
   def readUser
-    @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance)
+    @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
   end
 
   def updateUser
@@ -60,12 +60,18 @@ class ControllerUser
     @userView.deleteUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance)
   end
 
-  #authenticate
+  #authenticate method
   def authenticateUser(username, password)
-    if (@username ==username && @password == password)
-      @logged = true
+    if (@userModel.getUsername == username && @userModel.getPassword == password && @userModel.getLogged == false)
+      @userModel.setLogged = true
     end
-    puts @logged
+  end
+
+  #follow game method
+  def followGame(game_id, game)
+    if (@userModel.getFollowingGames.has_key? (game_id)) == false
+      @userModel.insertFollowGame(game_id, game)
+    end
   end
 
 

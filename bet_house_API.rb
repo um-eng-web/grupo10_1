@@ -1,6 +1,5 @@
 require_relative 'Controllers/controller_user'
-require_relative 'Models/user'
-require_relative 'Views/view_user'
+require_relative 'Controllers/controller_odd'
 
 class BetHouseAPI
   @@betGlobalId
@@ -40,3 +39,7 @@ house.viewUsers
 
 house.removeUser("basofe")
 house.viewUsers
+
+o = ControllerOdd.new
+o.createOdd #meninho:1.5:2.2:3.1
+o.readOdd

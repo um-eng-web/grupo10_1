@@ -1,3 +1,5 @@
+
+
 class User
 
   #instance variables
@@ -19,9 +21,13 @@ class User
     @balance = nil
     @logged = false
     @openBets = Hash.new
+    #@openBets.default = ControllerBet
     @betsHistory = Hash.new
+    #@betsHistory.default = ControllerBet
     @followingGames = Hash.new
+    #@followingGames.default = ControllerGame
     @gamesHistory = Hash.new
+    #@gamesHistory.default = ControllerGame
   end
 
   #accessor's methods (getters)
@@ -96,6 +102,12 @@ class User
 
   def setGamesHistory=(gHistory)
     @gamesHistory = gHistory
+  end
+
+
+  #add new game to following games hash
+  def insertFollowGame(game_id, game)
+    @followingGames[game_id] =  game
   end
 
 end

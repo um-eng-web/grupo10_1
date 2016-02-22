@@ -6,11 +6,13 @@ class ViewUser
     return gets.chomp
   end
 
-  def readUser(username, name, balance)
+  def readUser(username, name, balance, activeBetsNumber, followingNumber)
     puts "#:#:#:#:#:#:#:#:#:#:#:#:#:"
     puts "Username ::  #{username}"
     puts "Name :: #{name}"
     puts "Balance :: #{balance}"
+    puts "Number of Active Bets :: #{activeBetsNumber}"
+    puts "Number of Following Games :: #{followingNumber}"
   end
 
   def updateUser

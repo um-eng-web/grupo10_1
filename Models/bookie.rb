@@ -1,7 +1,7 @@
 class Bookie
 
   #instance variables
-  @bookiename
+  @bookieName
   @password
   @createdGames
   @followingGames
@@ -10,7 +10,7 @@ class Bookie
 
   #initialize
   def initialize(name, pass)
-    @bookiename = name
+    @bookieName = name
     @password = pass
     @createdGames = Hash.new
     @followingGames = Hash.new
@@ -19,55 +19,46 @@ class Bookie
 
 
   #accessors
-  def printBookiename
-    @bookiename
+  def getBookieName
+    @bookieName
   end
 
-  def printPassword
+  def getPassword
     @password
   end
 
-  def printCreatedGames
+  def getCreatedGames
     @createdGames
   end
 
-  def printFollowingGames
+  def getFollowingGames
     @followingGames
   end
 
-  def printNotifications
+  def getNotifications
     @notifications
   end
 
 
   #setters
-  def setBookiname(name)
-    @bookiename = name
+  def setBookiName=(name)
+    @bookieName = name
   end
 
-  def setPassword(pass)
+  def setPassword=(pass)
     @password = pass
   end
 
-  def setCreatedGames(cGames)
+  def setCreatedGames=(cGames)
     @createdGames = cGames
   end
 
-  def setFollowingGames(fGames)
+  def setFollowingGames=(fGames)
     @followingGames = fGames
   end
 
-  def setNotifications(notify)
+  def setNotifications=(notify)
     @notifications = notify
   end
 
-
-  #toString method
-  def to_s
-    puts "Bookiename ::  #{@bookiename}"
-    puts "Password :: #{@password}"
-    puts "Created Games :: #{@createdGames}"
-    puts "Following Games :: #{@followingGames}"
-    puts "Notifications :: #{@notifications}"
-  end
 end

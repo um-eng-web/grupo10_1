@@ -1,7 +1,7 @@
 class Odd
 
   #instance variables
-  @bookiename
+  @bookieName
   @odd1
   @oddX
   @odd2
@@ -9,66 +9,57 @@ class Odd
 
 
   #initialize
-  def initialize(name, one, x, two)
-    @bookiename = name
-    @odd1 = one
-    @oddX = x
-    @odd2 = two
-    @timestamp = Time.new
+  def initialize
+    @bookieName = nil
+    @odd1 = nil
+    @oddX = nil
+    @odd2 = nil
+    @timestamp = nil
   end
 
   #accessors
-  def printBookiename
-    @bookiename
+  def getBookieName
+    @bookieName
   end
 
-  def printOdd1
+  def getOdd1
     @odd1
   end
 
-  def printOddX
+  def getOddX
     @oddX
   end
 
-  def printOdd2
+  def getOdd2
     @odd2
   end
 
-  def printTimestamp
+  def getTimestamp
     @timestamp
   end
 
 
   #setters
-  def setBookiename(name)
-    @bookiename = name
+  def setBookieName=(name)
+    @bookieName = name
   end
 
-  def setOdd1(one)
+  def setOdd1=(one)
     @odd1 = one
   end
 
-  def setOddX(x)
+  def setOddX=(x)
     @oddX = x
   end
 
-  def setOdd2(two)
+  def setOdd2=(two)
     @odd2 = two
   end
 
-  def setTimestamp(time)
+  def setTimestamp=(time)
     @timestamp = time
   end
 
-
-  #toString method
-  def to_s
-    puts "Bookiename ::  #{@bookiename}"
-    puts "Odd1 :: #{@odd1}"
-    puts "OddX :: #{@oddX}"
-    puts "Odd2 :: #{@odd2}"
-    puts "Timestamp :: #{@timestamp}"
-  end
 
 
 end
