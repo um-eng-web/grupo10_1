@@ -21,8 +21,8 @@ class ViewGame
     return gets.chomp
   end
 
-  def deleteGame(id, creator, team1, team2, result)
-    puts "Game Deleted. (#{id}-#{creator}-#{team1}-#{team2}-#{result})"
+  def deleteGame(id, creator, team1, team2, result, actualOdd)
+    puts "Game Deleted. (#{id}-#{creator}-#{team1}-#{team2}-#{result}-#{actualOdd})"
   end
 
 

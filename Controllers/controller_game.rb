@@ -46,7 +46,7 @@ class ControllerGame
     @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s, @gameModel.getGameTime)
   end
 
-  def update
+  def updateGame
     temp = @gameView.updateGame
     array = temp.split(":")
     @gameModel.setGameId = array[0].to_i
@@ -56,7 +56,10 @@ class ControllerGame
     @gameModel.setGameTime = array[4]
   end
 
-
+  def deleteGame
+    odd = @gameModel.actualOdd
+    @gameView.deleteGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s)
+  end
 
   #method to insert an odd into an array of game odds
   def insertOdd

@@ -2,26 +2,37 @@ class Bet
 
   #instance variables
   @betId
-  @type
-  @state
+  @gameId
+  @game
+  @type #1-x-2
+  @state #open-closed-finished
   @betAmount
-  @result
-  @odd
+  @result #1-x-2
+  @odd  #just the value of the bet type
 
-  #initialize
-  def initialize(id, type, state, amount, result, odd)
-    @betId = id
-    @type = type
-    @state = state
-    @betAmount = amount
-    @result = result
-    @odd = odd
+  def initialize
+    @betId = nil
+    @gameId = nil
+    @game = nil
+    @type = nil
+    @state = nil
+    @betAmount = nil
+    @result = nil
+    @odd = nil
   end
 
 
   #accessors
   def getBetId
     @betId
+  end
+
+  def getGameId
+    @gameId
+  end
+
+  def getGame
+    @game
   end
 
   def getType
@@ -48,6 +59,14 @@ class Bet
   #setters
   def setBetId=(id)
     @betId = id
+  end
+
+  def setGameId=(id)
+    @gameId = id
+  end
+
+  def setGame=(game)
+    @game = game
   end
 
   def setType=(type)
