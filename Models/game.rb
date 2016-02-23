@@ -1,26 +1,38 @@
+require_relative '../Controllers/controller_odd'
+
 class Game
 
   #instance variables
   @gameId
+  @gameCreator
   @team1
   @team2
   @result
   @odds
-  @gameCreator
+  @gameTime #inicio do jogo
+  @finished #boolean para dizer se ja acabou
+  @closedToBet  #boolean para dizer se esta aberto ou fechado para apostar
 
-  #initialize
-  def initialize(id, t1, t2, res, odd, creator)
-    @gameId = id
-    @team1 = t1
-    @team2 = t2
-    @result = res
-    @odds = odd
-    @gameCreator = creator
+  #TODO ajustar o tamanho do array
+  def initialize
+    @gameId = nil
+    @gameCreator = nil
+    @team1 = nil
+    @team2 = nil
+    @result = nil
+    @odds = Array.new
+    @gameTime = nil
+    @finished = false
+    @closedToBet = false
   end
 
   #accessor methods
   def getGameId
     @gameId
+  end
+
+  def getGameCreator
+    @gameCreator
   end
 
   def getTeam1
@@ -39,14 +51,26 @@ class Game
     @odds
   end
 
-  def getGameCreator
-    @gameCreator
+  def getGameTime
+    @gameTime
+  end
+
+  def getFinished
+    @finished
+  end
+
+  def getClosedToBet
+    @closedToBet
   end
 
 
   #setter's
   def setGameId=(gId)
     @gameId = gId
+  end
+
+  def setGameCreator=(gc)
+    @gameCreator = gc
   end
 
   def setTeam1=(t1)
@@ -65,8 +89,36 @@ class Game
     @odds = odds
   end
 
-  def setGameCreator=(gc)
-    @gameCreator = gc
+  def setGameTime=(time)
+    @gameTime = time
+  end
+
+  def setFinished=(fin)
+    @finished = fin
+  end
+
+  def setClosedToBet=(closed)
+    @closedToBet = closed
+  end
+
+
+  #add new odd method
+  def insertOdd(newOdd)
+    @odds << newOdd
+    return (@odds.size-1)
+  end
+
+  #remove odd method
+  def removeOdd(index)
+    #TODO as duas primeiras linhas passam para o Controller
+    removedOdd = @odds.at(index)
+    removedOdd.deleteOdd
+    @odds.delete_at(index)
+  end
+
+  #get the most recent odd
+  def actualOdd
+    return @odds.last
   end
 
 end

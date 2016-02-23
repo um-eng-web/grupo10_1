@@ -19,7 +19,7 @@ class ViewOdd
   end
 
   def deleteOdd(bookie, odd1, oddx, odd2)
-    puts "Odd deleted. (#{bookie}-#{odd1}-#{oddx}-#{odd2}"
+    puts "Odd deleted. (#{bookie}-#{odd1}-#{oddx}-#{odd2})"
   end
 
 end

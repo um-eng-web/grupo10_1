@@ -61,5 +61,4 @@ class Odd
   end
 
 
-
 end

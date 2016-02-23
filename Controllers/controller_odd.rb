@@ -44,4 +44,23 @@ class ControllerOdd
     @oddView.readOdd(@oddModel.getBookieName, @oddModel.getOdd1, @oddModel.getOddX, @oddModel.getOdd2, @oddModel.getTimestamp)
   end
 
+  def updateOdd
+    temp = @oddView.updateOdd
+    array = temp.split(":")
+    @oddModel.setBookieName = array[0]
+    @oddModel.setOdd1 = array[1]
+    @oddModel.setOddX = array[2]
+    @oddModel.setOdd2 = array[3]
+    @oddModel.setTimestamp = Time.new
+  end
+
+  def deleteOdd
+    @oddView.deleteOdd(@oddModel.getBookieName, @oddModel.getOdd1, @oddModel.getOddX, @oddModel.getOdd2)
+  end
+
+  #toString method
+  def to_s
+    return "Creator: #{@oddModel.getBookieName}, Odd1: #{@oddModel.getOdd1}, OddX: #{@oddModel.getOddX}, Odd2: #{@oddModel.getOdd2}, Timestamp: #{@oddModel.getTimestamp}"
+  end
+
 end
