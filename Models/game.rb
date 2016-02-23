@@ -19,7 +19,7 @@ class Game
     @gameCreator = nil
     @team1 = nil
     @team2 = nil
-    @result = nil
+    @result = "Undefined"
     @odds = Array.new
     @gameTime = nil
     @finished = false
@@ -78,7 +78,7 @@ class Game
   end
 
   def setTeam2=(t2)
-    @team2
+    @team2 = t2
   end
 
   def setResult=(res)
@@ -105,14 +105,10 @@ class Game
   #add new odd method
   def insertOdd(newOdd)
     @odds << newOdd
-    return (@odds.size-1)
   end
 
   #remove odd method
   def removeOdd(index)
-    #TODO as duas primeiras linhas passam para o Controller
-    removedOdd = @odds.at(index)
-    removedOdd.deleteOdd
     @odds.delete_at(index)
   end
 

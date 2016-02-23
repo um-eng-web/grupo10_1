@@ -37,7 +37,7 @@ class ControllerGame
     @gameModel.setGameCreator = creator
     @gameModel.setTeam1 = array[0]
     @gameModel.setTeam2 = array[1]
-    @gameModel.setGameTime = array[3]
+    @gameModel.setGameTime = array[2]
     insertOdd
   end
 
@@ -46,16 +46,38 @@ class ControllerGame
     @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s, @gameModel.getGameTime)
   end
 
+  def update
+    temp = @gameView.updateGame
+    array = temp.split(":")
+    @gameModel.setGameId = array[0].to_i
+    @gameModel.setGameCreator = array[1]
+    @gameModel.setTeam1 = array[2]
+    @gameModel.setTeam2 = array[3]
+    @gameModel.setGameTime = array[4]
+  end
 
+
+
+  #method to insert an odd into an array of game odds
   def insertOdd
     newOdd = ControllerOdd.new
     newOdd.createOdd
     @gameModel.insertOdd(newOdd)
   end
 
+  #method to remove an odd from an array of game odds
+  def removeOdd
+    arrayOdd = @gameModel.getOdds
+    removeIndex = @gameView.printOddArray(arrayOdd)
+    removeOdd = arrayOdd.at(removeIndex)
+    removeOdd.deleteOdd
+    @gameModel.removeOdd(removeIndex)
+  end
 
 end
 
 g = ControllerGame.new
-g.createGame(0,"mister")
+g.createGame(0,"mister") #spoting:braga:qwe   mister:1:2:3
 g.readGame
+g.insertOdd #outro:2:3:4
+g.removeOdd

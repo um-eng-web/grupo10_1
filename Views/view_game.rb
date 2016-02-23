@@ -1,5 +1,6 @@
 class ViewGame
 
+  #CRUD views
   def createGame
     puts "Create new game: (team1:team2:time)"
     return gets.chomp
@@ -16,13 +17,21 @@ class ViewGame
   end
 
   def updateGame
-    puts "Create new game: (team1:team2:result:)"
-    var = gets.chomp
-    return var
+    puts "Create new game: (id:creator:team1:team2:result)"
+    return gets.chomp
   end
 
   def deleteGame(id, creator, team1, team2, result)
     puts "Game Deleted. (#{id}-#{creator}-#{team1}-#{team2}-#{result})"
+  end
+
+
+  #show odds with array index
+  def printOddArray(array)
+    puts "Odd - Index:"
+    array.each_with_index {|val, index| puts "#{val} - #{index}"}
+    puts "\nSelect the odd index you want to remove:"
+    return gets.chomp.to_i
   end
 
 end
