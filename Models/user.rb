@@ -1,4 +1,5 @@
-
+require_relative '../Controllers/controller_game'
+require_relative '../Controllers/controller_bet'
 
 class User
 
@@ -21,13 +22,13 @@ class User
     @balance = nil
     @logged = false
     @openBets = Hash.new
-    #@openBets.default = ControllerBet
+    @openBets.default = ControllerBet
     @betsHistory = Hash.new
-    #@betsHistory.default = ControllerBet
+    @betsHistory.default = ControllerBet
     @followingGames = Hash.new
-    #@followingGames.default = ControllerGame
+    @followingGames.default = ControllerGame
     @gamesHistory = Hash.new
-    #@gamesHistory.default = ControllerGame
+    @gamesHistory.default = ControllerGame
   end
 
   #accessor's methods (getters)

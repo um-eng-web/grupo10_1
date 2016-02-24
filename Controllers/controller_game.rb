@@ -79,8 +79,8 @@ class ControllerGame
 
 end
 
-g = ControllerGame.new
-g.createGame(0,"mister") #spoting:braga:qwe   mister:1:2:3
-g.readGame
-g.insertOdd #outro:2:3:4
-g.removeOdd
+#g = ControllerGame.new
+#g.createGame(0,"mister") #spoting:braga:qwe   mister:1:2:3
+#g.readGame
+#g.insertOdd #outro:2:3:4
+#g.removeOdd

@@ -44,7 +44,7 @@ class ControllerUser
   end
 
   def readUser
-    @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
+    @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getLogged, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
   end
 
   def updateUser

@@ -29,7 +29,9 @@ class ControllerBet
 
 
   #CRUD operations
-  def createBet(id)
+  def createBet(betId)
+    temp = @betView.createBet
+    array = temp.split(":")
 
   end
 

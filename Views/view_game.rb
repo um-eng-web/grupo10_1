@@ -7,7 +7,7 @@ class ViewGame
   end
 
   def readGame(id, creator, team1, team2, result, actualOdd, time)
-    puts "Game id: #{id}"
+    puts "\nGame id: #{id}"
     puts "Game creator: #{creator}"
     puts "Home: #{team1}"
     puts "Visitor: #{team2}"

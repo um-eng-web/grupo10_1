@@ -1,16 +1,22 @@
 require_relative 'Controllers/controller_user'
 require_relative 'Controllers/controller_odd'
+require_relative 'Controllers/controller_game'
+require_relative 'Controllers/controller_bet'
+require_relative 'Views/view_bet_house_api'
 
 class BetHouseAPI
-  @@betGlobalId
   @@gameGlobalId
   @users
+  @games
+  @betHouseView
 
   def initialize
-    @@betGlobalId = 0
     @@gameGlobalId = 0
     @users = Hash.new
     @users.default = ControllerUser
+    @games = Hash.new
+    @games.default = ControllerGame
+    @betHouseView = ViewBetHouseAPI.new
   end
 
   #users interface
@@ -29,6 +35,33 @@ class BetHouseAPI
     @users.delete(username)
   end
 
+  def authenticateUser
+    temp = @betHouseView.authenticate
+    array = temp.split(":")
+    if @users.has_key?(array[0])
+      @users[array[0]].authenticateUser(array[0],array[1])
+    else
+      @betHouseView.throwUsernameNotExistError
+    end
+
+  end
+
+  def followGameUser(username)
+    @games.each_value{|value| value.readGame}
+    gId = @betHouseView.chooseGameId.to_i
+    game = @games[gId]
+    @users[username].followGame(gId, game)
+  end
+
+  def createGame(creator)
+    newGame = ControllerGame.new
+    newGame.createGame(@@gameGlobalId, creator)
+    @games.store(@@gameGlobalId, newGame)
+    @@gameGlobalId+=1
+  end
+
+
+
 end
 house = BetHouseAPI.new
 house.registerUser #voluntario:4:ricardo:4321
@@ -43,3 +76,10 @@ house.viewUsers
 o = ControllerOdd.new
 o.createOdd #meninho:1.5:2.2:3.1
 o.readOdd
+
+house.authenticateUser  #voluntario:4
+house.viewUsers
+
+house.createGame("velhote") #Sporting:braga:t1   #velhote:1:2:3
+
+house.followGameUser("voluntario")
