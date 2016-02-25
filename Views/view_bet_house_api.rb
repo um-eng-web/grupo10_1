@@ -14,4 +14,14 @@ class ViewBetHouseAPI
     return gets.chomp
   end
 
+  def balanceAfterTransaction(balance)
+    puts "Your balance is #{balance}."
+  end
+
+  def selectTransactionalMode
+    puts "Select the transactional mode: (deposit or withdrawal)"
+    return gets.chomp
+  end
+
+
 end

@@ -53,6 +53,28 @@ class BetHouseAPI
     @users[username].followGame(gId, game)
   end
 
+  def unfollowGameUser(username)
+    @users[username].unfollowGame
+  end
+
+  def showFollowingGamesUser(username)
+    @users[username].showFollowingGames
+  end
+
+  def showHistoryGamesUser(username)
+    @users[username].showHistoryGames
+  end
+
+  def transactionBetCoinsUser(username)
+    mode = @betHouseView.selectTransactionalMode
+    @betHouseView.balanceAfterTransaction(@users[username].transactionBetCoins(mode))
+  end
+
+
+  #TODO showOpenBetsUser, showHistoryGamesUser
+
+
+  #bookie interface
   def createGame(creator)
     newGame = ControllerGame.new
     newGame.createGame(@@gameGlobalId, creator)
@@ -65,21 +87,30 @@ class BetHouseAPI
 end
 house = BetHouseAPI.new
 house.registerUser #voluntario:4:ricardo:4321
-house.registerUser #zde:12:zé:123
-house.registerUser #basofe:64:helder:123
+#house.registerUser #zde:12:zé:123
+#house.registerUser #basofe:64:helder:123
 
 house.viewUsers
 
-house.removeUser("basofe")
-house.viewUsers
+#house.removeUser("basofe")
+#house.viewUsers
 
-o = ControllerOdd.new
-o.createOdd #meninho:1.5:2.2:3.1
-o.readOdd
+#o = ControllerOdd.new
+#o.createOdd #meninho:1.5:2.2:3.1
+#o.readOdd
 
 house.authenticateUser  #voluntario:4
 house.viewUsers
 
-house.createGame("velhote") #Sporting:braga:t1   #velhote:1:2:3
+#house.createGame("velhote") #Sporting:braga:t1   #velhote:1:2:3
+house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
 
-house.followGameUser("voluntario")
+#house.followGameUser("voluntario")
+#house.showFollowingGamesUser("voluntario")
+#puts "---------------------"
+#house.unfollowGameUser("voluntario")
+#house.showFollowingGamesUser("voluntario")
+puts "---------------------"
+house.transactionBetCoinsUser("voluntario")
+house.transactionBetCoinsUser("voluntario")
+

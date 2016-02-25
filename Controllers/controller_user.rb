@@ -7,7 +7,8 @@ class ControllerUser
   @userModel
   @userView
 
-  #initialize method
+  #TODO transaction methods
+
   def initialize
       @userModel = User.new
       @userView = ViewUser.new
@@ -67,12 +68,45 @@ class ControllerUser
     end
   end
 
+  #method to show the following games
+  def showFollowingGames
+    followed = @userModel.getFollowingGames
+    followed.each_value{|value| puts value.readGame}
+  end
+
+  def showHistoryGames
+    history = @userModel.getGamesHistory
+    history.each_value{|value| puts value.readGame}
+  end
+
+  #TODO showOpenBets, showBetsHistory
+
   #follow game method
   def followGame(game_id, game)
     if (@userModel.getFollowingGames.has_key? (game_id)) == false
       @userModel.insertFollowGame(game_id, game)
     end
   end
+
+  #unfollow game method
+  def unfollowGame
+    showFollowingGames
+    index = @userView.selectUnfollowGame.to_i
+    @userModel.unfollowGame(index)
+  end
+
+  #transaction betCoins method
+  def transactionBetCoins(mode)
+    amount = @userView.transactionBetCoins.to_f
+    balance = @userModel.getBalance.to_f
+    if(mode == "deposit")
+      @userModel.setBalance = balance + amount
+    elsif(mode == "withdrawal")
+      @userModel.setBalance = balance - amount
+    end
+    return @userModel.getBalance
+  end
+
 
 
 

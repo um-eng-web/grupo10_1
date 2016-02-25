@@ -13,6 +13,7 @@ class User
   @betsHistory
   @followingGames
   @gamesHistory
+  @transactionHistory
 
   #initialize method
   def initialize
@@ -29,6 +30,8 @@ class User
     @followingGames.default = ControllerGame
     @gamesHistory = Hash.new
     @gamesHistory.default = ControllerGame
+    @transactionHistory = Hash.new
+    @transactionHistory.default = "Transaction undefined."
   end
 
   #accessor's methods (getters)
@@ -68,6 +71,10 @@ class User
     @gamesHistory
   end
 
+  def getTransactionHistory
+    @transactionHistory
+  end
+
   #setters
   def setUsername=(user)
     @username = user
@@ -105,10 +112,18 @@ class User
     @gamesHistory = gHistory
   end
 
+  def setTransactionHistory=(tHistory)
+    @transactionHistory = tHistory
+  end
+
 
   #add new game to following games hash
   def insertFollowGame(game_id, game)
     @followingGames[game_id] =  game
+  end
+
+  def unfollowGame(game_id)
+    @followingGames.delete(game_id)
   end
 
 end
