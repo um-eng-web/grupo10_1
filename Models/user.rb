@@ -145,4 +145,20 @@ class User
     @openBets[bet_id] = bet
   end
 
+  #remove bet from openBets hash
+  def removeOpenBet(bet_id)
+    @betsHistory.delete(bet_id)
+  end
+
+  #add new bet to historyBets hash
+  def insertBetHistory(bet_id, bet)
+    @betsHistory[bet_id] = bet
+  end
+
+  #remove bet from historyBets hash
+  def removeBetHistory(bet_id)
+    @betsHistory.delete(bet_id)
+  end
+
+
 end

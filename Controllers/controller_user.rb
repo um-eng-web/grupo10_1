@@ -1,5 +1,6 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
+require 'net/smtp'
 
 class ControllerUser
 
@@ -85,6 +86,11 @@ class ControllerUser
     bets.each_value{|value| puts value.readBet}
   end
 
+  def showBetsHistory
+    bets = @userModel.getBetsHistory
+    bets.each_value{|value| puts value.readBet}
+  end
+
 
   #follow game method
   def followGame(game_id, game)
@@ -127,6 +133,8 @@ class ControllerUser
     bet = ControllerBet.new
     bet.createBet(@userModel.getBetId, idGame, game)
     @userModel.insertOpenBet(@userModel.getBetId, bet)
+    @userModel.insertBetHistory(@userModel.getBetId, bet)
+    @userModel.incrementBetId
   end
 
 

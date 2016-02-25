@@ -4,7 +4,9 @@ require_relative 'Controllers/controller_game'
 require_relative 'Controllers/controller_bet'
 require_relative 'Views/view_bet_house_api'
 
+
 class BetHouseAPI
+
   @@gameGlobalId
   @users
   @games
@@ -81,6 +83,10 @@ class BetHouseAPI
     @users[username].showOpenBets
   end
 
+  def showBetsHistoryUser(username)
+    @users[username].showBetsHistory
+  end
+
   #bookie interface
   def createGame(creator)
     newGame = ControllerGame.new
@@ -91,6 +97,7 @@ class BetHouseAPI
 
 
   #bet interface
+  #TODO ver melhor as exceptions (montante nao suficiente, etc etc)
   def createBet(username)
     @games.each_value{|value| value.readGame}
     gId = @betHouseView.chooseGameId.to_i
@@ -98,20 +105,15 @@ class BetHouseAPI
     @users[username].bet(gId, game)
   end
 
+
+
 end
 house = BetHouseAPI.new
 house.registerUser #voluntario:4:ricardo:4321
 #house.registerUser #zde:12:zé:123
 #house.registerUser #basofe:64:helder:123
-
-house.viewUsers
-
 #house.removeUser("basofe")
 #house.viewUsers
-
-#o = ControllerOdd.new
-#o.createOdd #meninho:1.5:2.2:3.1
-#o.readOdd
 
 house.authenticateUser  #voluntario:4
 house.viewUsers
@@ -132,4 +134,7 @@ puts "---------------------"
 
 puts "---------------------"
 house.createBet("voluntario")
+puts "OpenBetsUser"
 house.showOpenBetsUser("voluntario")
+puts "BetsHistoryUser"
+house.showBetsHistoryUser("voluntario")
