@@ -65,14 +65,21 @@ class BetHouseAPI
     @users[username].showHistoryGames
   end
 
+  #TODO mudar a logica para o lado do user (esta na BetHouseAPI)
   def transactionBetCoinsUser(username)
     mode = @betHouseView.selectTransactionalMode
     @betHouseView.balanceAfterTransaction(@users[username].transactionBetCoins(mode))
   end
 
+  def changePassawordUser(username)
+    @users[username].changePassword
+  end
+
 
   #TODO showOpenBetsUser, showHistoryGamesUser
-
+  def showOpenBetsUser(username)
+    @users[username].showOpenBets
+  end
 
   #bookie interface
   def createGame(creator)
@@ -83,6 +90,13 @@ class BetHouseAPI
   end
 
 
+  #bet interface
+  def createBet(username)
+    @games.each_value{|value| value.readGame}
+    gId = @betHouseView.chooseGameId.to_i
+    game = @games[gId]
+    @users[username].bet(gId, game)
+  end
 
 end
 house = BetHouseAPI.new
@@ -111,6 +125,11 @@ house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
 #house.unfollowGameUser("voluntario")
 #house.showFollowingGamesUser("voluntario")
 puts "---------------------"
-house.transactionBetCoinsUser("voluntario")
-house.transactionBetCoinsUser("voluntario")
+#house.transactionBetCoinsUser("voluntario")
+#house.transactionBetCoinsUser("voluntario")
+puts "---------------------"
+#house.changePassawordUser("voluntario")
 
+puts "---------------------"
+house.createBet("voluntario")
+house.showOpenBetsUser("voluntario")

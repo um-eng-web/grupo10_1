@@ -17,7 +17,7 @@ class Bet
     @type = nil
     @state = nil
     @betAmount = nil
-    @result = nil
+    @result = "Undefined"
     @odd = nil
   end
 
@@ -83,6 +83,10 @@ class Bet
 
   def setOdd=(odd)
     @odd = odd
+  end
+
+  def setBetAmount=(amount)
+    @betAmount = amount
   end
 
 end

@@ -80,6 +80,11 @@ class ControllerUser
   end
 
   #TODO showOpenBets, showBetsHistory
+  def showOpenBets
+    bets = @userModel.getOpenBets
+    bets.each_value{|value| puts value.readBet}
+  end
+
 
   #follow game method
   def followGame(game_id, game)
@@ -107,7 +112,22 @@ class ControllerUser
     return @userModel.getBalance
   end
 
+  #change password method
+  def changePassword
+    passwords = @userView.changePassword
+    if (passwords[0] == @userModel.getPassword && passwords[1] == passwords[2])
+      @userModel.setPassword = passwords[1]
+    else
+      @userView.throwNewPasswordException
+    end
+  end
 
+  #bet method
+  def bet(idGame, game)
+    bet = ControllerBet.new
+    bet.createBet(@userModel.getBetId, idGame, game)
+    @userModel.insertOpenBet(@userModel.getBetId, bet)
+  end
 
 
 

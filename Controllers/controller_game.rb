@@ -77,6 +77,17 @@ class ControllerGame
     @gameModel.removeOdd(removeIndex)
   end
 
+  #method to get the value of the bet
+  #TODO corrigir else
+  def getSelectedOdd(oddType)
+    mostRecent = @gameModel.actualOdd
+    if(oddType == "1"|| oddType == "X" || oddType == "2")
+      mostRecent.getSelectedOdd(oddType)
+    else
+      puts "ERROOOROROOROROR"
+    end
+  end
+
 end
 
 #g = ControllerGame.new

@@ -4,6 +4,7 @@ require_relative '../Controllers/controller_bet'
 class User
 
   #instance variables
+  @@betId
   @username
   @password
   @name
@@ -17,6 +18,7 @@ class User
 
   #initialize method
   def initialize
+    @@betId = 0
     @username = nil
     @password = nil
     @name = nil
@@ -75,6 +77,10 @@ class User
     @transactionHistory
   end
 
+  def getBetId
+    @@betId
+  end
+
   #setters
   def setUsername=(user)
     @username = user
@@ -116,6 +122,14 @@ class User
     @transactionHistory = tHistory
   end
 
+  def setBetId=(bet)
+    @@betId = bet
+  end
+
+  def incrementBetId
+    @@betId += 1
+  end
+
 
   #add new game to following games hash
   def insertFollowGame(game_id, game)
@@ -124,6 +138,11 @@ class User
 
   def unfollowGame(game_id)
     @followingGames.delete(game_id)
+  end
+
+  #add new bet to openBets hash
+  def insertOpenBet(bet_id, bet)
+    @openBets[bet_id] = bet
   end
 
 end

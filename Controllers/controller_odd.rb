@@ -58,6 +58,19 @@ class ControllerOdd
     @oddView.deleteOdd(@oddModel.getBookieName, @oddModel.getOdd1, @oddModel.getOddX, @oddModel.getOdd2)
   end
 
+
+  #method to get a specific odd
+  def getSelectedOdd(type)
+    if(type == "1")
+      return @oddModel.getOdd1
+    elsif(type == "X")
+      return @oddModel.getOddX
+    else
+      return @oddModel.getOdd2
+    end
+  end
+
+
   #toString method
   def to_s
     return "Creator: #{@oddModel.getBookieName}, Odd1: #{@oddModel.getOdd1}, OddX: #{@oddModel.getOddX}, Odd2: #{@oddModel.getOdd2}, Timestamp: #{@oddModel.getTimestamp}"
