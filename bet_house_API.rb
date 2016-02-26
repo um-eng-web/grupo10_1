@@ -2,6 +2,7 @@ require_relative 'Controllers/controller_user'
 require_relative 'Controllers/controller_odd'
 require_relative 'Controllers/controller_game'
 require_relative 'Controllers/controller_bet'
+require_relative 'Controllers/controller_bookie'
 require_relative 'Views/view_bet_house_api'
 
 
@@ -9,6 +10,7 @@ class BetHouseAPI
 
   @@gameGlobalId
   @users
+  @bookies
   @games
   @betHouseView
 
@@ -16,6 +18,8 @@ class BetHouseAPI
     @@gameGlobalId = 0
     @users = Hash.new
     @users.default = ControllerUser
+    @bookies = Hash.new
+    @bookies.default = ControllerBookie
     @games = Hash.new
     @games.default = ControllerGame
     @betHouseView = ViewBetHouseAPI.new
@@ -38,7 +42,7 @@ class BetHouseAPI
   end
 
   def authenticateUser
-    temp = @betHouseView.authenticate
+    temp = @betHouseView.authenticateUser
     array = temp.split(":")
     if @users.has_key?(array[0])
       @users[array[0]].authenticateUser(array[0],array[1])
@@ -67,6 +71,15 @@ class BetHouseAPI
     @users[username].showHistoryGames
   end
 
+  def showOpenBetsUser(username)
+    @users[username].showOpenBets
+  end
+
+  def showBetsHistoryUser(username)
+    @users[username].showBetsHistory
+  end
+
+
   #TODO mudar a logica para o lado do user (esta na BetHouseAPI)
   def transactionBetCoinsUser(username)
     mode = @betHouseView.selectTransactionalMode
@@ -77,32 +90,61 @@ class BetHouseAPI
     @users[username].changePassword
   end
 
-
-  #TODO showOpenBetsUser, showHistoryGamesUser
-  def showOpenBetsUser(username)
-    @users[username].showOpenBets
-  end
-
-  def showBetsHistoryUser(username)
-    @users[username].showBetsHistory
-  end
-
   #bookie interface
+  def registerBookie
+    newBookie = ControllerBookie.new
+    newBookie.createBookie
+    @bookies[newBookie.getBookieModel.getBookieName] = newBookie
+  end
+
+  def viewBookies
+    @bookies.each_value{|value| puts value.readBookie}
+  end
+
+  def authenticateBookie
+    temp = @betHouseView.authenticateBookie
+    array = temp.split(":")
+    if @bookies.has_key?(array[0])
+      @bookies[array[0]].authenticateBookie(array[0],array[1])
+    else
+      @betHouseView.throwBookieNotExistError
+    end
+
+  end
+
+
+  #TODO testar isto
+  def showFollowingGamesBookie(bookie)
+    @bookies[bookie].showFollowingGames
+  end
+
+  #TODO testar isto
+  def showHistoryGamesBookie(bookie)
+    @bookies[bookie].showCreatedGames
+  end
+
+  #TODO testar isto
   def createGame(creator)
-    newGame = ControllerGame.new
-    newGame.createGame(@@gameGlobalId, creator)
-    @games.store(@@gameGlobalId, newGame)
+    newGame = @bookies[creator].createGame(@@gameGlobalId, creator)
+    @games[@@gameGlobalId] = newGame
     @@gameGlobalId+=1
   end
 
 
   #bet interface
-  #TODO ver melhor as exceptions (montante nao suficiente, etc etc)
   def createBet(username)
     @games.each_value{|value| value.readGame}
     gId = @betHouseView.chooseGameId.to_i
-    game = @games[gId]
-    @users[username].bet(gId, game)
+    if(@games.has_key?(gId))
+      game = @games[gId]
+      if(game.getClosedToBet == false)
+        @users[username].bet(gId, game)
+      else
+        @betHouseView.throwGameClosedToBetError
+      end
+    else
+      @betHouseView.throwGameNotExistError
+    end
   end
 
 
@@ -110,16 +152,21 @@ class BetHouseAPI
 end
 house = BetHouseAPI.new
 house.registerUser #voluntario:4:ricardo:4321
+house.registerBookie  #onofrio:novapass
+
 #house.registerUser #zde:12:zé:123
 #house.registerUser #basofe:64:helder:123
 #house.removeUser("basofe")
 #house.viewUsers
 
 house.authenticateUser  #voluntario:4
+house.authenticateBookie  #onofrio:novapass
+
 house.viewUsers
+house.viewBookies
 
 #house.createGame("velhote") #Sporting:braga:t1   #velhote:1:2:3
-house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
+#house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
 
 #house.followGameUser("voluntario")
 #house.showFollowingGamesUser("voluntario")
@@ -133,8 +180,8 @@ puts "---------------------"
 #house.changePassawordUser("voluntario")
 
 puts "---------------------"
-house.createBet("voluntario")
+#house.createBet("voluntario")
 puts "OpenBetsUser"
-house.showOpenBetsUser("voluntario")
+#house.showOpenBetsUser("voluntario")
 puts "BetsHistoryUser"
-house.showBetsHistoryUser("voluntario")
+#house.showBetsHistoryUser("voluntario")

@@ -1,20 +1,24 @@
+require_relative '../Controllers/controller_game'
+
 class Bookie
 
   #instance variables
   @bookieName
   @password
+  @logged
   @createdGames
   @followingGames
-  @notifications
 
 
   #initialize
-  def initialize(name, pass)
-    @bookieName = name
-    @password = pass
+  def initialize
+    @bookieName = nil
+    @password = nil
+    @logged = false
     @createdGames = Hash.new
+    @createdGames.default = ControllerGame
     @followingGames = Hash.new
-    @notifications = Array.new
+    @followingGames.default = ControllerGame
   end
 
 
@@ -27,6 +31,10 @@ class Bookie
     @password
   end
 
+  def getLogged
+    @logged
+  end
+
   def getCreatedGames
     @createdGames
   end
@@ -35,18 +43,18 @@ class Bookie
     @followingGames
   end
 
-  def getNotifications
-    @notifications
-  end
-
 
   #setters
-  def setBookiName=(name)
+  def setBookieName=(name)
     @bookieName = name
   end
 
   def setPassword=(pass)
     @password = pass
+  end
+
+  def setLogged=(log)
+    @logged = log
   end
 
   def setCreatedGames=(cGames)
@@ -57,8 +65,18 @@ class Bookie
     @followingGames = fGames
   end
 
-  def setNotifications=(notify)
-    @notifications = notify
+
+  def insertCreatedGame(gameId, game)
+    @createdGames[gameId] = game
+    @followingGames[gameId] = game
   end
+
+  #TODO fazer as condiçoes de verificaçao
+  def insertFollowingGame(gameId, game)
+    @followingGames[gameId] = game
+  end
+
+
+
 
 end

@@ -1,12 +1,21 @@
 class ViewBetHouseAPI
 
-  def authenticate
+  def authenticateUser
     puts "Insert your username and password: (username:password)"
+    return gets.chomp
+    end
+
+  def authenticateBookie
+    puts "Insert your bookiename and password: (bookiename:password)"
     return gets.chomp
   end
 
   def throwUsernameNotExistError
     puts "Error: Username does not exists!"
+    end
+
+  def throwBookieNotExistError
+    puts "Error: Bookie does not exists!"
   end
 
   def chooseGameId
@@ -23,5 +32,12 @@ class ViewBetHouseAPI
     return gets.chomp
   end
 
+  def throwGameNotExistError
+    puts "ERROR: The game you have selected does not exists."
+  end
+
+  def throwGameClosedToBetError
+    puts "ERROR: The game you have selected has already started."
+  end
 
 end

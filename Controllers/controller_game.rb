@@ -46,6 +46,7 @@ class ControllerGame
     @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s, @gameModel.getGameTime)
   end
 
+  #TODO ver o que posso editar
   def updateGame
     temp = @gameView.updateGame
     array = temp.split(":")

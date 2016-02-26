@@ -44,6 +44,8 @@ class ControllerOdd
     @oddView.readOdd(@oddModel.getBookieName, @oddModel.getOdd1, @oddModel.getOddX, @oddModel.getOdd2, @oddModel.getTimestamp)
   end
 
+
+  #TODO ver o que posso editar
   def updateOdd
     temp = @oddView.updateOdd
     array = temp.split(":")

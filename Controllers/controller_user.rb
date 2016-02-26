@@ -49,6 +49,7 @@ class ControllerUser
     @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getLogged, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
   end
 
+  #TODO ver o que posso editar
   def updateUser
     var = @userView.updateUser
     array = var.split(":")
@@ -80,7 +81,6 @@ class ControllerUser
     history.each_value{|value| puts value.readGame}
   end
 
-  #TODO showOpenBets, showBetsHistory
   def showOpenBets
     bets = @userModel.getOpenBets
     bets.each_value{|value| puts value.readBet}
@@ -131,7 +131,7 @@ class ControllerUser
   #bet method
   def bet(idGame, game)
     bet = ControllerBet.new
-    bet.createBet(@userModel.getBetId, idGame, game)
+    bet.createBet(@userModel.getBetId, idGame, game, @userModel.getBalance.to_f)
     @userModel.insertOpenBet(@userModel.getBetId, bet)
     @userModel.insertBetHistory(@userModel.getBetId, bet)
     @userModel.incrementBetId
