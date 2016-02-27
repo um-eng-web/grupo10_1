@@ -40,4 +40,11 @@ class ViewBetHouseAPI
     puts "ERROR: The game you have selected has already started."
   end
 
+  def throwUsernameAlreadyExists
+    puts "ERROR: Choose another username."
+  end
+
+  def throwPasswordAlreadyExists
+    puts "ERROR: Choose another password."
+  end
 end

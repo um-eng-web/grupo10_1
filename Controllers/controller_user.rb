@@ -64,6 +64,7 @@ class ControllerUser
   end
 
   #authenticate method
+  #TODO por prints de erros
   def authenticateUser(username, password)
     if (@userModel.getUsername == username && @userModel.getPassword == password && @userModel.getLogged == false)
       @userModel.setLogged = true

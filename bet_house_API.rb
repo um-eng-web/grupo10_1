@@ -25,11 +25,36 @@ class BetHouseAPI
     @betHouseView = ViewBetHouseAPI.new
   end
 
+  def getGameGlobalId
+    @@gameGlobalId
+  end
+
+  def getUsers
+    @users
+  end
+
+  def getBookies
+    @bookies
+  end
+
+  def getGames
+    @games
+  end
+
+  def getBetHouseView
+    @betHouseView
+  end
+
+
+
   #users interface
   def registerUser
     newUser = ControllerUser.new
     newUser.createUser
-    @users[newUser.getUserModel.getUsername] = newUser
+    if(@users.has_key?(newUser.getUserModel.getUsername) == false)
+      @users[newUser.getUserModel.getUsername] = newUser
+      else @betHouseView.throwUsernameAlreadyExists
+    end
   end
 
   def viewUsers
@@ -44,7 +69,7 @@ class BetHouseAPI
   def authenticateUser
     temp = @betHouseView.authenticateUser
     array = temp.split(":")
-    if @users.has_key?(array[0])
+    if(@users.has_key?(array[0]))
       @users[array[0]].authenticateUser(array[0],array[1])
     else
       @betHouseView.throwUsernameNotExistError
@@ -94,7 +119,10 @@ class BetHouseAPI
   def registerBookie
     newBookie = ControllerBookie.new
     newBookie.createBookie
-    @bookies[newBookie.getBookieModel.getBookieName] = newBookie
+    if(@bookies.has_key?(newBookie.getBookieModel.getBookieName) == false)
+      @bookies[newBookie.getBookieModel.getBookieName] = newBookie
+      else @betHouseView.throwUsernameAlreadyExists
+    end
   end
 
   def viewBookies
@@ -119,13 +147,13 @@ class BetHouseAPI
   end
 
   #TODO testar isto
-  def showHistoryGamesBookie(bookie)
+  def showCreatedGamesBookie(bookie)
     @bookies[bookie].showCreatedGames
   end
 
   #TODO testar isto
   def createGame(creator)
-    newGame = @bookies[creator].createGame(@@gameGlobalId, creator)
+    newGame = @bookies[creator].createGame(@@gameGlobalId)
     @games[@@gameGlobalId] = newGame
     @@gameGlobalId+=1
   end
@@ -150,22 +178,22 @@ class BetHouseAPI
 
 
 end
-house = BetHouseAPI.new
-house.registerUser #voluntario:4:ricardo:4321
-house.registerBookie  #onofrio:novapass
+#house = BetHouseAPI.new
+#house.registerUser #voluntario:4:ricardo:4321
+#house.registerBookie  #onofrio:novapass
 
 #house.registerUser #zde:12:zé:123
 #house.registerUser #basofe:64:helder:123
 #house.removeUser("basofe")
 #house.viewUsers
 
-house.authenticateUser  #voluntario:4
-house.authenticateBookie  #onofrio:novapass
+#house.authenticateUser  #voluntario:4
+#house.authenticateBookie  #onofrio:novapass
 
-house.viewUsers
-house.viewBookies
+#house.viewUsers
+#house.viewBookies
 
-#house.createGame("velhote") #Sporting:braga:t1   #velhote:1:2:3
+#house.createGame("onofrio") #Sporting:braga:t1   #velhote:1:2:3
 #house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
 
 #house.followGameUser("voluntario")
@@ -173,15 +201,15 @@ house.viewBookies
 #puts "---------------------"
 #house.unfollowGameUser("voluntario")
 #house.showFollowingGamesUser("voluntario")
-puts "---------------------"
+#puts "---------------------"
 #house.transactionBetCoinsUser("voluntario")
 #house.transactionBetCoinsUser("voluntario")
-puts "---------------------"
+#puts "---------------------"
 #house.changePassawordUser("voluntario")
 
-puts "---------------------"
+#puts "---------------------"
 #house.createBet("voluntario")
-puts "OpenBetsUser"
+#puts "OpenBetsUser"
 #house.showOpenBetsUser("voluntario")
-puts "BetsHistoryUser"
+#puts "BetsHistoryUser"
 #house.showBetsHistoryUser("voluntario")
