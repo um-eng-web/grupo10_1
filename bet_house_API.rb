@@ -46,10 +46,17 @@ class BetHouseAPI
   end
 
   #TODO fazer uma timeline com todos os acontecimentos do user
-
-  #users interface
   #TODO bet method
   #TODO showUserProfile
+  #TODO notificationsUser
+  #TODO notificationsBookie
+  #TODO showBookieProfile
+  #TODO observer pattern
+  #TODO 
+
+
+
+  #users interface
   def registerUser
     newUser = ControllerUser.new
     newUser.createUser
@@ -186,6 +193,9 @@ class BetHouseAPI
       end
       }
   end
+
+
+
 
 end
 #house = BetHouseAPI.new
