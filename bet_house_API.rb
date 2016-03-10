@@ -45,9 +45,11 @@ class BetHouseAPI
     @betHouseView
   end
 
-
+  #TODO fazer uma timeline com todos os acontecimentos do user
 
   #users interface
+  #TODO bet method
+  #TODO showUserProfile
   def registerUser
     newUser = ControllerUser.new
     newUser.createUser
@@ -71,6 +73,7 @@ class BetHouseAPI
     array = temp.split(":")
     if(@users.has_key?(array[0]))
       @users[array[0]].authenticateUser(array[0],array[1])
+      return array[0]
     else
       @betHouseView.throwUsernameNotExistError
     end
@@ -175,7 +178,14 @@ class BetHouseAPI
     end
   end
 
-
+  #TODO testar isto
+  def showActiveGames
+    @games.each_value{|value|
+      if(value.getClosedToBet == false)
+        value.readGame
+      end
+      }
+  end
 
 end
 #house = BetHouseAPI.new

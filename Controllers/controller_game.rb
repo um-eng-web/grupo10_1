@@ -89,6 +89,10 @@ class ControllerGame
     end
   end
 
+  def getClosedToBet
+    return @gameModel.getClosedToBet
+  end
+
 end
 
 #g = ControllerGame.new
