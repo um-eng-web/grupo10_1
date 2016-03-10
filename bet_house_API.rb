@@ -52,7 +52,8 @@ class BetHouseAPI
   #TODO notificationsBookie
   #TODO showBookieProfile
   #TODO observer pattern
-  #TODO 
+  #TODO showActiveGames
+
 
 
 
@@ -88,7 +89,8 @@ class BetHouseAPI
   end
 
   def followGameUser(username)
-    @games.each_value{|value| value.readGame}
+#    @games.each_value{|value| value.readGame}
+    showActiveGames
     gId = @betHouseView.chooseGameId.to_i
     game = @games[gId]
     @users[username].followGame(gId, game)
