@@ -14,7 +14,7 @@ class Menu
 
   def menuAuthReg
     puts "BetESS Ruby"
-    puts "Authentication/Regestration:"
+    puts "Authentication/Registration:"
     puts "1- User"
     puts "2- Bookie"
     puts "3- Create User"
@@ -24,11 +24,19 @@ class Menu
     option = gets.to_i
     case option
       when 1
-        #TODO check to proceed
         username = @house.authenticateUser
-        menuUser(username)
+        if(username != nil)
+          menuUser(username)
+        else
+          menuAuthReg
+        end
       when 2
-        @house.authenticateBookie
+        bookiename = @house.authenticateBookie
+        if(bookiename != nil)
+          menuBookie(bookiename)
+        else
+          menuAuthReg
+        end
       when 3
         @house.registerUser
         menuAuthReg
