@@ -138,6 +138,9 @@ class ControllerUser
     @userModel.incrementBetId
   end
 
+  def getLogged
+    @userModel.getLogged
+  end
 
 
 end
