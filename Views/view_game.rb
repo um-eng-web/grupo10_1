@@ -17,7 +17,7 @@ class ViewGame
   end
 
   def updateGame
-    puts "Create new game: (id:creator:team1:team2:result)"
+    puts "Create new game: (team1:team2:result)"
     return gets.chomp
   end
 
@@ -39,7 +39,7 @@ class ViewGame
   end
 
   def successGameEndedToBet
-    puts"Game Closed to Bet Successfuly"
+    puts"Game Ended Successfuly"
   end
 
   def gameToCloseAlreadyExists

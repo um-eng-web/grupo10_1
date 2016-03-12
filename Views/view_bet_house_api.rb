@@ -62,4 +62,13 @@ class ViewBetHouseAPI
     puts "Insert the ID of the game you want to end"
     return gets.chomp.to_i
   end
+
+  def gameUpdate
+    puts "Insert the ID of the game you want to update"
+    return gets.chomp.to_i
+  end
+  def insertResult
+    puts "Insert the result of the game you want to end, please."
+    return gets.chomp
+  end
 end

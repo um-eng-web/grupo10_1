@@ -50,11 +50,9 @@ class ControllerGame
   def updateGame
     temp = @gameView.updateGame
     array = temp.split(":")
-    @gameModel.setGameId = array[0].to_i
-    @gameModel.setGameCreator = array[1]
-    @gameModel.setTeam1 = array[2]
-    @gameModel.setTeam2 = array[3]
-    @gameModel.setGameTime = array[4]
+    @gameModel.setTeam1 = array[0]
+    @gameModel.setTeam2 = array[1]
+    @gameModel.setGameTime = array[2]
   end
 
   def deleteGame
@@ -93,6 +91,10 @@ class ControllerGame
     return @gameModel.getClosedToBet
   end
 
+  def getFinished
+    return @gameModel.getFinished
+  end
+
   def gameClosedToBet
     if(@gameModel.getClosedToBet)
       @gameView.gameToCloseAlreadyExists
@@ -103,12 +105,13 @@ class ControllerGame
 
   end
 
-  def endGame
+  def endGame (result)
     if(@gameModel.getFinished)
       @gameView.gameToEndAlreadyExists
     else
       @gameModel.setClosedToBet = true
       @gameModel.setFinished = true
+      @gameModel.setResult = result
       @gameView.successGameEndedToBet
     end
 

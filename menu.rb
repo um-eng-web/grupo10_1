@@ -168,6 +168,8 @@ class Menu
         menuBookie(bookiename)
       when 5
         #editGame/updateGame
+        @house.showActiveGames
+        @house.updateGame
         menuBookie(bookiename)
       when 6
         #deleteGame
@@ -216,6 +218,7 @@ class Menu
         listMenuBookie(bookiename)
       when 4
         #gamesHistory
+        @house.showHistoryGames
         listMenuBookie(bookiename)
       when 5
         #online users

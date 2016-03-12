@@ -197,6 +197,14 @@ class BetHouseAPI
       }
   end
 
+  def showHistoryGames
+    @games.each_value{|value|
+      if(value.getFinished == true)
+        value.readGame
+      end
+    }
+  end
+
   #TODO testar isto
   def showOnlineUsers
     puts "Online Users:"
@@ -225,12 +233,21 @@ class BetHouseAPI
     def gameEnded
       temp = @betHouseView.gameEnded
       if @games.has_key?(temp)
-        @games[temp].endGame
+        result = @betHouseView.insertResult
+        @games[temp].endGame (result)
       else
         @betHouseView.throwGameToCloseNotExists
       end
-      end
+    end
 
+  def gameUpdate
+    temp = @betHouseView.gameUpdate
+    if @games.has_key?(temp)
+      @games[temp].updateGame
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
 
 
 
