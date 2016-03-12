@@ -45,10 +45,12 @@ class Menu
         menuAuthReg
       when 0
         nil
+      else
+        puts"Invalid Option"
+        menuAuthReg
     end
   end
 
-  #TODO insert logout option
   def menuUser(username)
     puts "Welcome, #{username}"
     puts "1- Bet"
@@ -89,11 +91,13 @@ class Menu
         @house.changePassawordUser(username)
         menuUser(username)
       when 9
-        puts "Logout efectuado com sucesso"
-        return
-
+        puts "Logout successfully done"
+        nil
       when 0
         menuAuthReg
+      else
+        puts"Invalid Option"
+        menuUser(username)
     end
   end
 
@@ -125,10 +129,12 @@ class Menu
         listMenuUser(username)
       when 0
         menuUser(username)
+      else
+        puts"Invalid Option"
+        listMenuUser(username)
     end
   end
 
-  #TODO insert logout option
   def menuBookie(bookiename)
     puts "Welcome, #{bookiename}"
     puts "1- Create Game"
@@ -140,6 +146,7 @@ class Menu
     puts "7- Follow Game"
     puts "8- Unfollow Game"
     puts "9- List Menu"
+    puts "10- Logout"
     puts "0- Back"
 
     option = gets.to_i
@@ -170,8 +177,14 @@ class Menu
         menuBookie(bookiename)
       when 9
         listMenuBookie(bookiename)
+      when 10
+        puts "Logout successfully done"
+        nil
       when 0
         menuAuthReg
+      else
+        puts"Invalid Option"
+        menuBookie(bookiename)
     end
   end
 
