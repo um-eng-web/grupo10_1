@@ -34,4 +34,20 @@ class ViewGame
     return gets.chomp.to_i
   end
 
+  def successGameClosedToBet
+    puts"Game Closed to Bet Successfuly"
+  end
+
+  def successGameEndedToBet
+    puts"Game Closed to Bet Successfuly"
+  end
+
+  def gameToCloseAlreadyExists
+    puts"The Game you want to close, is already closed!"
+  end
+
+  def gameToEndAlreadyExists
+    puts"The Game you want to end, is already ended!"
+  end
+
 end

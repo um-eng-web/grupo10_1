@@ -47,4 +47,19 @@ class ViewBetHouseAPI
   def throwPasswordAlreadyExists
     puts "ERROR: Choose another password."
   end
+
+  def throwGameToCloseNotExists
+    puts "ERROR: Choose another Game."
+  end
+
+
+  def gameClosetoBet
+    puts "Insert the ID of the game you want to end the bets"
+    return gets.chomp.to_i
+  end
+
+  def gameEnded
+    puts "Insert the ID of the game you want to end"
+    return gets.chomp.to_i
+  end
 end

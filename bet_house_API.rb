@@ -213,6 +213,27 @@ class BetHouseAPI
     @users.each_value{|value| value.readUser}
   end
 
+  def gameCloseToBet
+    temp = @betHouseView.gameClosetoBet
+    if @games.has_key?(temp)
+      @games[temp].gameClosedToBet
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+    def gameEnded
+      temp = @betHouseView.gameEnded
+      if @games.has_key?(temp)
+        @games[temp].endGame
+      else
+        @betHouseView.throwGameToCloseNotExists
+      end
+      end
+
+
+
+
 end
 #house = BetHouseAPI.new
 #house.registerBookie  #onofrio:novapass

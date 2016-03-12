@@ -93,6 +93,27 @@ class ControllerGame
     return @gameModel.getClosedToBet
   end
 
+  def gameClosedToBet
+    if(@gameModel.getClosedToBet)
+      @gameView.gameToCloseAlreadyExists
+    else
+    @gameModel.setClosedToBet = true
+    @gameView.successGameClosedToBet
+    end
+
+  end
+
+  def endGame
+    if(@gameModel.getFinished)
+      @gameView.gameToEndAlreadyExists
+    else
+      @gameModel.setClosedToBet = true
+      @gameModel.setFinished = true
+      @gameView.successGameEndedToBet
+    end
+
+  end
+
 end
 
 #g = ControllerGame.new

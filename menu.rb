@@ -92,7 +92,7 @@ class Menu
         menuUser(username)
       when 9
         puts "Logout successfully done"
-        nil
+        menuAuthReg
       when 0
         menuAuthReg
       else
@@ -155,10 +155,13 @@ class Menu
         @house.createGame(bookiename)
         menuBookie(bookiename)
       when 2
-        #closeGameBet
+        #closeGame
+        @house.showActiveGames
+        @house.gameCloseToBet
         menuBookie(bookiename)
       when 3
-        #endGame
+        @house.showActiveGames
+        @house.gameEnded
         menuBookie(bookiename)
       when 4
         #notifications
@@ -179,7 +182,7 @@ class Menu
         listMenuBookie(bookiename)
       when 10
         puts "Logout successfully done"
-        nil
+        menuAuthReg
       when 0
         menuAuthReg
       else
