@@ -59,6 +59,7 @@ class Menu
     puts "6- Profile"
     puts "7- Transact BetCoins"
     puts "8- Change Password"
+    puts "9- Logout"
     puts "0- Back"
 
     option = gets.to_i
@@ -87,6 +88,10 @@ class Menu
       when 8
         @house.changePassawordUser(username)
         menuUser(username)
+      when 9
+        puts "Logout efectuado com sucesso"
+        return
+
       when 0
         menuAuthReg
     end
