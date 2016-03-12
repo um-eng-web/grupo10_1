@@ -30,13 +30,13 @@ class ControllerOdd
 
 
   #CRUD methods
-  def createOdd
+  def createOdd (creator)
     temp = @oddView.createOdd
     array = temp.split(":")
-    @oddModel.setBookieName = array[0]
-    @oddModel.setOdd1 = array[1]
-    @oddModel.setOddX = array[2]
-    @oddModel.setOdd2 = array[3]
+    @oddModel.setBookieName = creator
+    @oddModel.setOdd1 = array[0]
+    @oddModel.setOddX = array[1]
+    @oddModel.setOdd2 = array[2]
     @oddModel.setTimestamp = Time.new
   end
 

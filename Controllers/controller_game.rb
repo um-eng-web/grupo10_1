@@ -38,7 +38,7 @@ class ControllerGame
     @gameModel.setTeam1 = array[0]
     @gameModel.setTeam2 = array[1]
     @gameModel.setGameTime = array[2]
-    insertOdd
+    insertOdd(creator)
   end
 
   def readGame
@@ -63,9 +63,9 @@ class ControllerGame
   end
 
   #method to insert an odd into an array of game odds
-  def insertOdd
+  def insertOdd (creator)
     newOdd = ControllerOdd.new
-    newOdd.createOdd
+    newOdd.createOdd (creator)
     @gameModel.insertOdd(newOdd)
   end
 

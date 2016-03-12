@@ -214,10 +214,10 @@ class BetHouseAPI
   end
 
 end
-house = BetHouseAPI.new
-house.registerBookie  #onofrio:novapass
-house.registerUser
-house.authenticateUser
+#house = BetHouseAPI.new
+#house.registerBookie  #onofrio:novapass
+#house.registerUser
+#house.authenticateUser
 
 
 #house.createGame("onofrio")
@@ -226,5 +226,5 @@ house.authenticateUser
 
 #house.showActiveGames
 
-house.showOnlineUsers
-house.showAllUsers
+#house.showOnlineUsers
+#house.showAllUsers
