@@ -65,6 +65,9 @@ class ControllerBookie
   def authenticateBookie(bookiename, password)
     if (@bookieModel.getBookieName == bookiename && @bookieModel.getPassword == password && @bookieModel.getLogged == false)
       @bookieModel.setLogged = true
+      return true
+    else
+      return false
     end
   end
 

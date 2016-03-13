@@ -11,11 +11,11 @@ class ViewBetHouseAPI
   end
 
   def throwUsernameNotExistError
-    puts "Error: Username does not exists!"
+    puts "Error: Username does not exists or password is incorrect!"
     end
 
   def throwBookieNotExistError
-    puts "Error: Bookie does not exists!"
+    puts "Error: Bookie does not exists or password is incorrect!"
   end
 
   def chooseGameId

@@ -79,14 +79,13 @@ class BetHouseAPI
   def authenticateUser
     temp = @betHouseView.authenticateUser
     array = temp.split(":")
-    if(@users.has_key?(array[0]))
-      @users[array[0]].authenticateUser(array[0],array[1])
+    if(@users.has_key?(array[0]) && @users[array[0]].authenticateUser(array[0],array[1]))
       return array[0]
     else
       @betHouseView.throwUsernameNotExistError
     end
-
   end
+
 
   def followGameUser(username)
     showActiveGames
@@ -137,7 +136,7 @@ class BetHouseAPI
     newBookie.createBookie
     if(@bookies.has_key?(newBookie.getBookieModel.getBookieName) == false)
       @bookies[newBookie.getBookieModel.getBookieName] = newBookie
-      else @betHouseView.throwUsernameAlreadyExists
+    else @betHouseView.throwUsernameAlreadyExists
     end
   end
 
@@ -148,13 +147,11 @@ class BetHouseAPI
   def authenticateBookie
     temp = @betHouseView.authenticateBookie
     array = temp.split(":")
-    if @bookies.has_key?(array[0])
-      @bookies[array[0]].authenticateBookie(array[0],array[1])
+    if @bookies.has_key?(array[0]) && @bookies[array[0]].authenticateBookie(array[0],array[1])
       return array[0]
     else
       @betHouseView.throwBookieNotExistError
     end
-
   end
 
 
