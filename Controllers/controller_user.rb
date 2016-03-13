@@ -142,5 +142,10 @@ class ControllerUser
     @userModel.getLogged
   end
 
+  def userLogout
+    @userModel.setLogged = false
+    @userView.loggedOut
+  end
+
 
 end

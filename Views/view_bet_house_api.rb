@@ -63,6 +63,15 @@ class ViewBetHouseAPI
     return gets.chomp.to_i
   end
 
+  def gameDelete
+    puts "Insert the ID of the game you want to delete"
+    return gets.chomp.to_i
+  end
+
+  def throwGameDeleted
+    puts"Game successfully Removed"
+  end
+
   def gameUpdate
     puts "Insert the ID of the game you want to update"
     return gets.chomp.to_i

@@ -126,6 +126,10 @@ class BetHouseAPI
     @users[username].changePassword
   end
 
+  def userLogout(username)
+    @users[username].userLogout
+  end
+
   #bookie interface
   def registerBookie
     newBookie = ControllerBookie.new
@@ -246,6 +250,17 @@ class BetHouseAPI
       end
     end
 
+  def removeGame(bookie)
+    temp = @betHouseView.gameDelete
+    if @games.has_key?(temp)
+      @games.delete(temp)
+      @bookies[bookie].removeCreatedGame(temp)
+      @betHouseView.throwGameDeleted
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
   def gameUpdate (bookiename)
     temp = @betHouseView.gameUpdate
     if @games.has_key?(temp)
@@ -262,6 +277,9 @@ class BetHouseAPI
     end
   end
 
+  def bookieLogout(bookie)
+    @bookies[bookie].bookieLogout
+  end
 
 
 end

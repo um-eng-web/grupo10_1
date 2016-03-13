@@ -80,4 +80,12 @@ class ControllerBookie
     created.each_value{|value| puts value.readGame}
   end
 
+  def removeCreatedGame(gameId)
+    @bookieModel.getCreatedGames.delete(gameId)
+  end
+
+  def bookieLogout
+    @bookieModel.setLogged = false
+    @bookieView.loggedOut
+  end
 end

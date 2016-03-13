@@ -91,7 +91,7 @@ class Menu
         @house.changePassawordUser(username)
         menuUser(username)
       when 9
-        puts "Logout successfully done"
+        @house.userLogout(username)
         menuAuthReg
       when 0
         menuAuthReg
@@ -169,10 +169,14 @@ class Menu
       when 5
         #editGame/updateGame
         @house.showActiveGames
+        @house.showHistoryGames
         @house.gameUpdate (bookiename)
         menuBookie(bookiename)
       when 6
         #deleteGame
+        @house.showActiveGames
+        @house.showHistoryGames
+        @house.removeGame (bookiename)
         menuBookie(bookiename)
       when 7
         #followGameBookie
@@ -183,7 +187,7 @@ class Menu
       when 9
         listMenuBookie(bookiename)
       when 10
-        puts "Logout successfully done"
+        @house.bookieLogout(bookiename)
         menuAuthReg
       when 0
         menuAuthReg
@@ -202,8 +206,7 @@ class Menu
     puts "5- List Game's Odds History"
     puts "6- List Online Users"
     puts "7- List All Users"
-    puts "8- List Odds"
-    puts "9- List Notifications"
+    puts "8- List Notifications"
     puts "0- Back"
 
     option = gets.to_i
@@ -229,14 +232,13 @@ class Menu
         listMenuBookie(bookiename)
       when 6
         #online users
+        @house.showOnlineUsers
         listMenuBookie(bookiename)
       when 7
         #all users
+        @house.showAllUsers
         listMenuBookie(bookiename)
       when 8
-        #list odds
-        listMenuBookie(bookiename)
-      when 9
         #notifications
         listMenuBookie(bookiename)
       when 0

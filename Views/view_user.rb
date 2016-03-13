@@ -48,5 +48,9 @@ class ViewUser
     puts "ERROR: Incorrect Password."
   end
 
+  def loggedOut
+    puts "Logout successfully done"
+  end
+
 end
 

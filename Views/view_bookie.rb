@@ -21,4 +21,7 @@ class ViewBookie
     puts "Delete bookie. #{bookiename}"
   end
 
+  def loggedOut
+    puts "Logout successfully done"
+  end
 end
