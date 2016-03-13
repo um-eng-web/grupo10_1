@@ -28,6 +28,10 @@ class ControllerGame
     @gameView = view
   end
 
+  def getOdds
+    return @gameModel.getOdds
+  end
+
 
   #CRUD operations
   def createGame(id, creator)
@@ -47,12 +51,20 @@ class ControllerGame
   end
 
   #TODO ver o que posso editar
-  def updateGame
-    temp = @gameView.updateGame
+  def updateGameOpen (creator)
+    temp = @gameView.updateGameOpen
     array = temp.split(":")
     @gameModel.setTeam1 = array[0]
     @gameModel.setTeam2 = array[1]
     @gameModel.setGameTime = array[2]
+    insertOdd(creator)
+
+  end
+
+  def updateGameFinished (creator)
+    temp = @gameView.updateGameFinished
+    array = temp.split(":")
+    @gameModel.setResult = array[0]
   end
 
   def deleteGame
@@ -66,6 +78,9 @@ class ControllerGame
     newOdd.createOdd (creator)
     @gameModel.insertOdd(newOdd)
   end
+
+
+
 
   #method to remove an odd from an array of game odds
   def removeOdd
@@ -114,8 +129,11 @@ class ControllerGame
       @gameModel.setResult = result
       @gameView.successGameEndedToBet
     end
+    end
 
-  end
+    def listOddsGame
+      @gameView.printOdds(@gameModel.getOdds)
+    end
 
 end
 

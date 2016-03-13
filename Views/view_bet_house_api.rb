@@ -67,8 +67,17 @@ class ViewBetHouseAPI
     puts "Insert the ID of the game you want to update"
     return gets.chomp.to_i
   end
+
+  def listOddsGame
+    puts "Insert the ID of the game you want to list the odds"
+    return gets.chomp.to_i
+  end
   def insertResult
     puts "Insert the result of the game you want to end, please."
     return gets.chomp
+  end
+
+  def throwUnavailableGame
+    puts "This game is not available to be updated."
   end
 end

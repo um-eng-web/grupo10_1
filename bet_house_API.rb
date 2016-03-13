@@ -158,12 +158,10 @@ class BetHouseAPI
     @bookies[bookie].showFollowingGames
   end
 
-  #TODO testar isto
   def showCreatedGamesBookie(bookie)
     @bookies[bookie].showCreatedGames
   end
 
-  #TODO testar isto
   def createGame(creator)
     newGame = @bookies[creator].createGame(@@gameGlobalId)
     @games[@@gameGlobalId] = newGame
@@ -188,7 +186,6 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar isto
   def showActiveGames
     @games.each_value{|value|
       if(value.getClosedToBet == false)
@@ -203,6 +200,15 @@ class BetHouseAPI
         value.readGame
       end
     }
+  end
+
+  def showListOddsOfAGame
+    temp = @betHouseView.listOddsGame
+    if @games.has_key?(temp)
+      @games[temp].listOddsGame
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
   end
 
   #TODO testar isto
@@ -240,10 +246,17 @@ class BetHouseAPI
       end
     end
 
-  def gameUpdate
+  def gameUpdate (bookiename)
     temp = @betHouseView.gameUpdate
     if @games.has_key?(temp)
-      @games[temp].updateGame
+      if @games[temp].getFinished
+        @games[temp].updateGameFinished(bookiename)
+      elsif @games[temp].getClosedToBet
+        @betHouseView.throwUnavailableGame
+      else
+        @games[temp].updateGameOpen (bookiename)
+
+      end
     else
       @betHouseView.throwGameToCloseNotExists
     end

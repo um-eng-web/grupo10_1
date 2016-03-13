@@ -169,7 +169,7 @@ class Menu
       when 5
         #editGame/updateGame
         @house.showActiveGames
-        @house.updateGame
+        @house.gameUpdate (bookiename)
         menuBookie(bookiename)
       when 6
         #deleteGame
@@ -199,10 +199,11 @@ class Menu
     puts "2- List Following Games"
     puts "3- List Created Games"
     puts "4- List Games History"
-    puts "5- List Online Users"
-    puts "6- List All Users"
-    puts "7- List Odds"
-    puts "8- List Notifications"
+    puts "5- List Game's Odds History"
+    puts "6- List Online Users"
+    puts "7- List All Users"
+    puts "8- List Odds"
+    puts "9- List Notifications"
     puts "0- Back"
 
     option = gets.to_i
@@ -221,15 +222,21 @@ class Menu
         @house.showHistoryGames
         listMenuBookie(bookiename)
       when 5
-        #online users
+        #odds of game
+        @house.showActiveGames
+        @house.showHistoryGames
+        @house.showListOddsOfAGame
         listMenuBookie(bookiename)
       when 6
-        #all users
+        #online users
         listMenuBookie(bookiename)
       when 7
-        #list odds
+        #all users
         listMenuBookie(bookiename)
       when 8
+        #list odds
+        listMenuBookie(bookiename)
+      when 9
         #notifications
         listMenuBookie(bookiename)
       when 0

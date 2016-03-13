@@ -49,10 +49,9 @@ class ControllerOdd
   def updateOdd
     temp = @oddView.updateOdd
     array = temp.split(":")
-    @oddModel.setBookieName = array[0]
-    @oddModel.setOdd1 = array[1]
-    @oddModel.setOddX = array[2]
-    @oddModel.setOdd2 = array[3]
+    @oddModel.setOdd1 = array[0]
+    @oddModel.setOddX = array[1]
+    @oddModel.setOdd2 = array[2]
     @oddModel.setTimestamp = Time.new
   end
 
