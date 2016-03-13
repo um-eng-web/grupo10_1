@@ -16,7 +16,7 @@ class ViewUser
   end
 
   def updateUser
-    puts "Insira os dados do utilizador (username:password:name:balance):"
+    puts "Insira os dados do utilizador (username:name):"
     return gets.chomp
   end
 

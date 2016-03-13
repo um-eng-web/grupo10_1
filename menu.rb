@@ -58,7 +58,7 @@ class Menu
     puts "3- Unfollow Game"
     puts "4- Notifications"
     puts "5- List Menu"
-    puts "6- Profile"
+    puts "6- Show Profile"
     puts "7- Transact BetCoins"
     puts "8- Change Password"
     puts "9- Logout"
@@ -82,7 +82,7 @@ class Menu
         listMenuUser(username)
         menuUser(username)
       when 6
-        #@house.
+        @house.getUsers[username].readUser
         menuUser(username)
       when 7
         @house.transactionBetCoinsUser(username)

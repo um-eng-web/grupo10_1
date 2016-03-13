@@ -49,14 +49,11 @@ class ControllerUser
     @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getLogged, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
   end
 
-  #TODO ver o que posso editar
   def updateUser
     var = @userView.updateUser
     array = var.split(":")
     @userModel.setUsername =array[0]
-    @userModel.setPassword = array[1]
-    @userModel.setName = array[2]
-    @userModel.setBalance = array[3].to_f
+    @userModel.setName = array[1]
   end
 
   def deleteUser
@@ -66,7 +63,7 @@ class ControllerUser
   #authenticate method
   #TODO por prints de erros
   def authenticateUser(username, password)
-    if (@userModel.getUsername == username && @userModel.getPassword == password && @userModel.getLogged == false)
+    if (@userModel.getUsername == username && @userModel.getPassword.equal?(password) && @userModel.getLogged == false)
       @userModel.setLogged = true
     end
   end

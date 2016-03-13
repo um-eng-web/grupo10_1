@@ -116,6 +116,7 @@ class BetHouseAPI
   end
 
 
+
   #TODO mudar a logica para o lado do user (esta na BetHouseAPI)
   def transactionBetCoinsUser(username)
     mode = @betHouseView.selectTransactionalMode
