@@ -142,9 +142,9 @@ class Menu
     puts "6- Delete Game"
     puts "7- Follow Game"
     puts "8- Unfollow Game"
-    puts "9- List Menu"
-    puts "10- Logout"
-    puts "0- Back"
+    puts "9- Change Password"
+    puts "10- List Menu"
+    puts "11- Logout"
 
     option = gets.to_i
     case option
@@ -182,12 +182,15 @@ class Menu
         #unfollowGameBookie
         menuBookie(bookiename)
       when 9
-        listMenuBookie(bookiename)
+        #ChangePassword
+        @house.changePassawordBookie(bookiename)
+        menuBookie(bookiename)
       when 10
+        listMenuBookie(bookiename)
+      when 11
         @house.bookieLogout(bookiename)
         menuAuthReg
-      when 0
-        menuAuthReg
+
       else
         puts"Invalid Option"
         menuBookie(bookiename)

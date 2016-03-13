@@ -123,7 +123,7 @@ class BetHouseAPI
   end
 
   def changePassawordUser(username)
-    @users[username].changePassword
+    @users[username].changePasswordUser
   end
 
   def userLogout(username)
@@ -279,6 +279,9 @@ class BetHouseAPI
     @bookies[bookie].bookieLogout
   end
 
+  def changePassawordBookie(bookie)
+    @bookies[bookie].changePasswordBookie
+  end
 
 end
 #house = BetHouseAPI.new

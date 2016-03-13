@@ -120,7 +120,7 @@ class ControllerUser
   end
 
   #change password method
-  def changePassword
+  def changePasswordUser
     passwords = @userView.changePassword
     if (passwords[0] == @userModel.getPassword && passwords[1] == passwords[2])
       @userModel.setPassword = passwords[1]

@@ -91,4 +91,13 @@ class ControllerBookie
     @bookieModel.setLogged = false
     @bookieView.loggedOut
   end
+
+  def changePasswordBookie
+    passwords = @bookieView.changePassword
+    if (passwords[0] == @bookieModel.getPassword && passwords[1] == passwords[2])
+      @bookieModel.setPassword = passwords[1]
+    else
+      @bookieView.throwNewPasswordException
+    end
+  end
 end
