@@ -1,7 +1,8 @@
 require_relative '../Models/bookie'
 require_relative '../Views/view_bookie'
+require_relative '../observer'
 
-class ControllerBookie
+class ControllerBookie < Observer
 
   @bookieModel
   @bookieView

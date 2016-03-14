@@ -61,4 +61,9 @@ class ViewGame
     puts"The Game you want to end, is already ended!"
   end
 
+  def printObservers(array)
+    puts "Observer"
+    array.each {|val| puts "#{val}"}
+  end
+
 end

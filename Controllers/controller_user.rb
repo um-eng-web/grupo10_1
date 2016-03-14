@@ -1,8 +1,9 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
 require 'net/smtp'
+require_relative '../observer'
 
-class ControllerUser
+class ControllerUser < Observer
 
   #instance variables
   @userModel

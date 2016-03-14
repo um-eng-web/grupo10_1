@@ -1,9 +1,9 @@
 require_relative '../Controllers/controller_odd'
 require_relative '../Models/game'
 require_relative '../Views/view_game'
-
+require 'observer'
 class ControllerGame
-
+  include Observable
   @gameModel
   @gameView
 
@@ -43,7 +43,10 @@ class ControllerGame
     @gameModel.setTeam2 = array[1]
     @gameModel.setGameTime = array[2]
     insertOdd(creator)
-  end
+    @gameModel.insertObserver(creator)
+    return @gameModel
+    end
+
 
   def readGame
     odd = @gameModel.actualOdd
@@ -135,7 +138,12 @@ class ControllerGame
       @gameView.printOdds(@gameModel.getOdds)
     end
 
+  def printObservers
+    @gameView.printObservers(@gameModel.getObservers)
+  end
 end
+
+
 
 #g = ControllerGame.new
 #g.createGame(0,"mister") #spoting:braga:qwe   mister:1:2:3
