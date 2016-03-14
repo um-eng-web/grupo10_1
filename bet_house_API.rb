@@ -306,6 +306,16 @@ class BetHouseAPI
     end
   end
 
+  def chooseGameToUnfollow(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesFollowBookie(bookiename)
+      @bookies[bookiename].unfollowGame(@games[game])
+      @games[game].removeObserver(bookiename)
+    else
+      @betHouseView.throwGameAlreadyUnfollowed
+    end
+  end
+
 end
 #house = BetHouseAPI.new
 #house.registerBookie  #onofrio:novapass

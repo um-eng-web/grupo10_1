@@ -76,6 +76,10 @@ class Bookie
     @followingGames[gameId] = game
   end
 
+  def removeFollowedGame(gameId, game)
+    @followingGames.delete(gameId)
+  end
+
 
 
 

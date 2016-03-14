@@ -182,6 +182,8 @@ class Menu
         menuBookie(bookiename)
       when 8
         #unfollowGameBookie
+        @house.showFollowingGamesBookie(bookiename)
+        @house.chooseGameToUnfollow(bookiename)
         menuBookie(bookiename)
       when 9
         #ChangePassword

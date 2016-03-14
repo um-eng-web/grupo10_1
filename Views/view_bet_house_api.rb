@@ -93,4 +93,8 @@ class ViewBetHouseAPI
   def throwGameAlreadyFollowed
     puts"You already followed the game you've choosed or you can't follow it"
   end
+
+  def throwGameAlreadyUnfollowed
+    puts"You already unfollowed the game you've choosed or you can't unfollow it"
+  end
 end

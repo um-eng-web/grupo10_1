@@ -81,6 +81,11 @@ class ControllerBookie < Observer
   def followGame(game)
     @bookieModel.insertFollowingGame(game.getGameModel.getGameId,game)
   end
+
+  def unfollowGame(game)
+    @bookieModel.removeFollowedGame(game.getGameModel.getGameId,game)
+  end
+  #
   #method to show the created games
   def showCreatedGames
     created = @bookieModel.getCreatedGames

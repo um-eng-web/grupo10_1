@@ -162,6 +162,11 @@ class ControllerGame
   def insertObserver(bookiename)
     @gameModel.insertObserver(bookiename)
   end
+
+  def removeObserver(bookiename)
+    index = @gameModel.getObservers.index(bookiename)
+    @gameModel.removeObserver(index)
+  end
 end
 
 

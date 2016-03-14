@@ -131,9 +131,9 @@ class Game
     @observers << observer
   end
 
-  #remove odd method
-  def removeObservers(observer)
-    @observers.delete_at(observer)
+  #remove observer method
+  def removeObserver(index)
+    @observers.delete_at(index)
   end
 
 end
