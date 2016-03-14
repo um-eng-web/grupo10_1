@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="552a5c0d-e1b6-4aec-a599-c102a5cdb941" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controllers/controller_bookie.rb" afterPath="$PROJECT_DIR$/Controllers/controller_bookie.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controllers/controller_game.rb" afterPath="$PROJECT_DIR$/Controllers/controller_game.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/bookie.rb" afterPath="$PROJECT_DIR$/Models/bookie.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Models/game.rb" afterPath="$PROJECT_DIR$/Models/game.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/view_bet_house_api.rb" afterPath="$PROJECT_DIR$/Views/view_bet_house_api.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bet_house_API.rb" afterPath="$PROJECT_DIR$/bet_house_API.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu.rb" afterPath="$PROJECT_DIR$/menu.rb" />
     </list>
@@ -25,7 +20,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/BetEssRuby@game.coverage" NAME="game Coverage Results" MODIFIED="1457984109490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Models" MODULE_NAME="BetEssRuby" />
     <SUITE FILE_PATH="coverage/BetEssRuby@bookie.coverage" NAME="bookie Coverage Results" MODIFIED="1457801067166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Models" MODULE_NAME="BetEssRuby" />
-    <SUITE FILE_PATH="coverage/BetEssRuby@menu.coverage" NAME="menu Coverage Results" MODIFIED="1457984351765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="BetEssRuby" />
+    <SUITE FILE_PATH="coverage/BetEssRuby@menu.coverage" NAME="menu Coverage Results" MODIFIED="1457985112198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="BetEssRuby" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -40,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/bet_house_API.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="311" column="36" selection-start-line="311" selection-start-column="36" selection-end-line="311" selection-end-column="36" />
+              <caret line="309" column="39" selection-start-line="309" selection-start-column="39" selection-end-line="309" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -50,29 +45,29 @@
         <entry file="file://$PROJECT_DIR$/menu.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="185" column="29" selection-start-line="185" selection-start-column="29" selection-end-line="185" selection-end-column="29" />
+              <caret line="225" column="12" selection-start-line="225" selection-start-column="12" selection-end-line="225" selection-end-column="12" />
               <folding>
-                <marker date="1457982528000" expanded="true" signature="4653:4661" placeholder="case ... end" />
+                <marker date="1457985094000" expanded="true" signature="4601:4609" placeholder="case ... end" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bookie.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bookie.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Models/bookie.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56473213">
+            <state vertical-scroll-proportion="0.0">
               <caret line="79" column="34" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller_game.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controller_game.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Controllers/controller_game.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.259259">
-              <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
+            <state vertical-scroll-proportion="5.023753">
+              <caret line="141" column="20" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -132,13 +127,13 @@
         <option value="$PROJECT_DIR$/Models/user.rb" />
         <option value="$PROJECT_DIR$/Controllers/controller_user.rb" />
         <option value="$PROJECT_DIR$/Views/view_game.rb" />
-        <option value="$PROJECT_DIR$/menu.rb" />
         <option value="$PROJECT_DIR$/Controllers/controller_bookie.rb" />
         <option value="$PROJECT_DIR$/Models/bookie.rb" />
         <option value="$PROJECT_DIR$/Views/view_bet_house_api.rb" />
         <option value="$PROJECT_DIR$/Models/game.rb" />
         <option value="$PROJECT_DIR$/Controllers/controller_game.rb" />
         <option value="$PROJECT_DIR$/bet_house_API.rb" />
+        <option value="$PROJECT_DIR$/menu.rb" />
       </list>
     </option>
   </component>
@@ -506,14 +501,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="23" width="1440" height="705" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24305555" sideWeight="0.44117647" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.50285715" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28096676" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28096676" sideWeight="0.49714285" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24305555" sideWeight="0.5588235" order="2" side_tool="true" content_ui="tabs" />
@@ -707,7 +702,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="160" column="17" selection-start-line="160" selection-start-column="17" selection-end-line="160" selection-end-column="17" />
           <folding>
-            <marker date="1457982528000" expanded="true" signature="4653:4661" placeholder="case ... end" />
+            <marker date="1457985094000" expanded="true" signature="4601:4609" placeholder="case ... end" />
           </folding>
         </state>
       </provider>
@@ -771,7 +766,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1457982528000" expanded="true" signature="4653:4661" placeholder="case ... end" />
+            <marker date="1457985094000" expanded="true" signature="4601:4609" placeholder="case ... end" />
           </folding>
         </state>
       </provider>
@@ -909,16 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menu.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="185" column="29" selection-start-line="185" selection-start-column="29" selection-end-line="185" selection-end-column="29" />
-          <folding>
-            <marker date="1457982528000" expanded="true" signature="4653:4661" placeholder="case ... end" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Models/game.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -927,26 +912,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controllers/controller_game.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.259259">
-          <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/view_bet_house_api.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="32" selection-start-line="96" selection-start-column="6" selection-end-line="96" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bet_house_API.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="311" column="36" selection-start-line="311" selection-start-column="36" selection-end-line="311" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -961,8 +930,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Models/bookie.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56473213">
+        <state vertical-scroll-proportion="0.0">
           <caret line="79" column="34" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bet_house_API.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="309" column="39" selection-start-line="309" selection-start-column="39" selection-end-line="309" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="225" column="12" selection-start-line="225" selection-start-column="12" selection-end-line="225" selection-end-column="12" />
+          <folding>
+            <marker date="1457985094000" expanded="true" signature="4601:4609" placeholder="case ... end" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controllers/controller_game.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.023753">
+          <caret line="141" column="20" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="20" />
           <folding />
         </state>
       </provider>

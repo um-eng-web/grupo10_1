@@ -307,6 +307,7 @@ class BetHouseAPI
   end
 
   def chooseGameToUnfollow(bookiename)
+    showFollowingGamesBookie(bookiename)
     game = @betHouseView.chooseGameId.to_i
     if @games.has_key?(game) && @games[game].gamesFollowBookie(bookiename)
       @bookies[bookiename].unfollowGame(@games[game])
