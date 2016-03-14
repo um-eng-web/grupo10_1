@@ -91,6 +91,6 @@ class ViewBetHouseAPI
   end
 
   def throwGameAlreadyFollowed
-    puts"You already followed the game you've choosed or doesn't exists"
+    puts"You already followed the game you've choosed or you can't follow it"
   end
 end

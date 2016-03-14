@@ -298,7 +298,7 @@ class BetHouseAPI
 
   def chooseGameToFollow(bookiename)
     game = @betHouseView.chooseGameId.to_i
-    if @games.has_key?(game) && @games[game].gamesUnfollowBookie(bookiename) && @games[game].gameIsOpen
+    if @games.has_key?(game) && @games[game].gamesUnfollowBookie(bookiename) && !(@games[game].getFinished)
         @bookies[bookiename].followGame(@games[game])
         @games[game].insertObserver(bookiename)
     else

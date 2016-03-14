@@ -109,9 +109,6 @@ class ControllerGame
     return @gameModel.getClosedToBet
   end
 
-  def gameIsOpen
-    return ! (@gameModel.getClosedToBet && @gameModel.getFinished)
-  end
 
   def getFinished
     return @gameModel.getFinished
