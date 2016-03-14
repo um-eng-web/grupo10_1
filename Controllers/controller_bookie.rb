@@ -78,6 +78,9 @@ class ControllerBookie < Observer
     followed.each_value{|value| puts value.readGame}
   end
 
+  def followGame(game)
+    @bookieModel.insertFollowingGame(game.getGameModel.getGameId,game)
+  end
   #method to show the created games
   def showCreatedGames
     created = @bookieModel.getCreatedGames

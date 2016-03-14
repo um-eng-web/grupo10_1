@@ -177,6 +177,8 @@ class Menu
         menuBookie(bookiename)
       when 7
         #followGameBookie
+        @house.showActiveUnfollowGamesBookie(bookiename)
+        @house.chooseGameToFollow(bookiename)
         menuBookie(bookiename)
       when 8
         #unfollowGameBookie

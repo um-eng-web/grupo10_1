@@ -196,6 +196,19 @@ class BetHouseAPI
       }
   end
 
+  def showActiveUnfollowGamesBookie(bookiename)
+
+    @games.each_value{|value|
+      if(value.getClosedToBet == false && value.gamesUnfollowBookie(bookiename))
+        value.readGame
+      end
+    }
+  end
+
+  def chooseGameById
+    @betHouseView.chooseGameId.to_i
+  end
+
   def showHistoryGames
     @games.each_value{|value|
       if(value.getFinished == true)
@@ -281,6 +294,16 @@ class BetHouseAPI
 
   def changePassawordBookie(bookie)
     @bookies[bookie].changePasswordBookie
+  end
+
+  def chooseGameToFollow(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesUnfollowBookie(bookiename) && @games[game].gameIsOpen
+        @bookies[bookiename].followGame(@games[game])
+        @games[game].insertObserver(bookiename)
+    else
+      @betHouseView.throwGameAlreadyFollowed
+    end
   end
 
 end

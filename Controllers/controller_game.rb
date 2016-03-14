@@ -109,6 +109,10 @@ class ControllerGame
     return @gameModel.getClosedToBet
   end
 
+  def gameIsOpen
+    return ! (@gameModel.getClosedToBet && @gameModel.getFinished)
+  end
+
   def getFinished
     return @gameModel.getFinished
   end
@@ -140,6 +144,26 @@ class ControllerGame
 
   def printObservers
     @gameView.printObservers(@gameModel.getObservers)
+  end
+
+  def gamesUnfollowBookie(bookiename)
+    if @gameModel.getObservers.include?(bookiename)
+      return false
+    else
+      return true
+    end
+  end
+
+  def gamesFollowBookie(bookiename)
+    if @gameModel.getObservers.include?(bookiename)
+      return true
+    else
+      return false
+    end
+  end
+
+  def insertObserver(bookiename)
+    @gameModel.insertObserver(bookiename)
   end
 end
 

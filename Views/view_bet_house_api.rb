@@ -89,4 +89,8 @@ class ViewBetHouseAPI
   def throwUnavailableGame
     puts "This game is not available to be updated."
   end
+
+  def throwGameAlreadyFollowed
+    puts"You already followed the game you've choosed or doesn't exists"
+  end
 end
