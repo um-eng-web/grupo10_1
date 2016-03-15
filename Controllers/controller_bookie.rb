@@ -111,8 +111,8 @@ class ControllerBookie < Observer
   end
 
 
-  def update(resultado, notificacao)
-    puts "FUI NOTIICADO ===> #{notificacao}"
+  def update(gameId, result, updateString)
+    puts "FUI NOTIICADO ===> #{updateString}"
   end
 
 

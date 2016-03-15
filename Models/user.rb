@@ -5,6 +5,7 @@ class User
 
   #instance variables
   @@betId
+  @@notificationId
   @username
   @password
   @name
@@ -20,6 +21,7 @@ class User
   #initialize method
   def initialize
     @@betId = 0
+    @@notificationId = 0
     @username = nil
     @password = nil
     @name = nil
@@ -146,6 +148,10 @@ class User
     @followingGames[game_id] =  game
   end
 
+  def insertHistoryGame(gameId, game)
+    @gamesHistory[gameId] = game
+  end
+
   def unfollowGame(game_id)
     @followingGames.delete(game_id)
   end
@@ -168,6 +174,32 @@ class User
   #remove bet from historyBets hash
   def removeBetHistory(bet_id)
     @betsHistory.delete(bet_id)
+  end
+
+
+  def endGameUpdateOpenBets(gameId, result)
+    @openBets.each_value {|value|
+      balance = getBalance
+      bet = value.updateBetResult(gameId, result)
+      if(bet == nil)
+        bet = 0.0
+      end
+      self.setBalance =(balance + bet)
+      return bet;
+    }
+  end
+
+  def moveOpenBetToHistory(gameId)
+    @openBets.each_value { |value|
+      if(value.getGameId == gameId)
+        @betsHistory.store(value.getBetId, value)
+      end
+    }
+  end
+
+  def insertNotification(notification)
+    @notifications[@@notificationId] = notification
+    @@notificationId+= 1
   end
 
 

@@ -18,10 +18,6 @@ class ViewGame
     puts "Finished?: #{finished}"
   end
 
-  def updateGameOpen
-    puts "Update game: (team1:team2:Time)"
-    return gets.chomp
-  end
 
   def updateGameFinished
     puts "Update game: (result)"
@@ -66,5 +62,6 @@ class ViewGame
     puts "Observer"
     array.each {|val| puts "#{val.to_s}"}
   end
+
 
 end

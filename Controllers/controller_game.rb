@@ -58,13 +58,7 @@ class ControllerGame
 
   #TODO ver o que posso editar
   def updateGameOpen (creator)
-    temp = @gameView.updateGameOpen
-    array = temp.split(":")
-    @gameModel.setTeam1 = array[0]
-    @gameModel.setTeam2 = array[1]
-    @gameModel.setGameTime = array[2]
     insertOdd(creator)
-
   end
 
   def updateGameFinished (creator)
@@ -128,7 +122,6 @@ class ControllerGame
     if(@gameModel.getFinished)
       @gameView.gameToEndAlreadyExists
     else
-      @gameModel.setClosedToBet = true
       @gameModel.setFinished = true
       @gameModel.setResult = result
       @gameView.successGameEndedToBet
@@ -173,8 +166,8 @@ class ControllerGame
   end
 
   #TODO acabar isto
-  def notObservers
-    notifyObservers("Hell","HELLO")
+  def notObservers(gameId, result, string)
+    notifyObservers(gameId, result, string)
   end
 
 end

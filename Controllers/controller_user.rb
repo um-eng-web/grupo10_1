@@ -62,7 +62,6 @@ class ControllerUser < Observer
   end
 
   #authenticate method
-  #TODO por prints de erros
   def authenticateUser(username, password)
     if (@userModel.getUsername == username && @userModel.getPassword == password && @userModel.getLogged == false)
       @userModel.setLogged = true
@@ -75,22 +74,38 @@ class ControllerUser < Observer
   #method to show the following games
   def showFollowingGames
     followed = @userModel.getFollowingGames
-    followed.each_value{|value| puts value.readGame}
+    followed.each_value{|value|
+      if(value.getFinished != true)
+        puts value.readGame
+      end
+    }
   end
 
   def showHistoryGames
     history = @userModel.getGamesHistory
-    history.each_value{|value| puts value.readGame}
+    history.each_value{|value|
+      if(value.getFinished == true)
+        puts value.readGame
+      end
+    }
   end
 
   def showOpenBets
     bets = @userModel.getOpenBets
-    bets.each_value{|value| puts value.readBet}
+    bets.each_value{|value|
+      if(value.getState != "Finished")
+      puts value.readBet
+      end
+    }
   end
 
   def showBetsHistory
     bets = @userModel.getBetsHistory
-    bets.each_value{|value| puts value.readBet}
+    bets.each_value{|value|
+      if(value.getState == "Finished")
+      puts value.readBet
+      end
+    }
   end
 
 
@@ -132,10 +147,12 @@ class ControllerUser < Observer
 
   def bet(idGame, game)
     bet = ControllerBet.new
-    bet.createBet(@userModel.getBetId, idGame, game, @userModel.getBalance.to_f)
+    amount = bet.createBet(@userModel.getBetId, idGame, game, @userModel.getBalance.to_f)
+    @userModel.setBalance = @userModel.getBalance.to_f - amount
     @userModel.insertOpenBet(@userModel.getBetId, bet)
     @userModel.insertBetHistory(@userModel.getBetId, bet)
     @userModel.insertFollowGame(idGame, game)
+    @userModel.insertHistoryGame(idGame, game)
     @userModel.incrementBetId
   end
 
@@ -149,10 +166,20 @@ class ControllerUser < Observer
   end
 
   #TODO fazer isto
-  def update(resultado, notificacao)
+  def update(gameId, result, updateString)
 
-    puts "FUI NOTIICADO ===> #{notificacao}"
+    newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
+    @userModel.insertNotification(newNotification)
   end
 
+
+  def endGameUpdate(gameId, result)
+    @userModel.endGameUpdateOpenBets(gameId, result)
+  end
+
+  def showNotifications
+    nots = @userModel.getNotifications
+    nots.each_value {|value| puts "#{value.to_s}"}
+  end
 
 end
