@@ -166,8 +166,8 @@ class ControllerGame
   end
 
   #TODO acabar isto
-  def notObservers
-    notifyObservers("Hell","HELLO")
+  def notObservers(gameId, result, string)
+    notifyObservers(gameId, result, string)
   end
 
 end

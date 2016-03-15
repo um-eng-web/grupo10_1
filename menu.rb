@@ -77,7 +77,7 @@ class Menu
         menuUser(username)
       when 4
         #TODO
-        #notifications
+        @house.showUserNotifications(username)
         menuUser(username)
       when 5
         listMenuUser(username)
@@ -126,7 +126,7 @@ class Menu
         listMenuUser(username)
       when 4
         #TODO
-        #@house.showAllNotificationsUser(username)
+        @house.showUserNotifications(username)
         listMenuUser(username)
       when 5
         @house.showBetsHistoryUser(username)
@@ -229,6 +229,7 @@ class Menu
         @house.showOnlineUsers
         listMenuBookie(bookiename)
       when 7
+        #all users
         @house.showAllUsers
         listMenuBookie(bookiename)
       when 8

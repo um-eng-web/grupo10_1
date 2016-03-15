@@ -1,6 +1,6 @@
 class Observer
 
-  def update(updateString)
+  def update(gameId, result, updateString)
   end
 
 end

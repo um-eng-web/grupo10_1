@@ -63,4 +63,5 @@ class ViewGame
     array.each {|val| puts "#{val.to_s}"}
   end
 
+
 end

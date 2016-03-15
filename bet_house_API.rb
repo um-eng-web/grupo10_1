@@ -239,7 +239,7 @@ class BetHouseAPI
       @users.each_value {|value| value.endGameUpdate(temp, result)}
 
 
-      @games[temp].notObservers
+      @games[temp].notObservers(temp, result, "O jogo #{temp} acabou e o resultado final foi #{result}")
       @games[temp].endGame(result)
     else
       @betHouseView.throwGameToCloseNotExists
@@ -328,6 +328,10 @@ class BetHouseAPI
   def showAllUsers
     puts "All Users:"
     @users.each_value{|value| value.readUser}
+  end
+
+  def showUserNotifications(username)
+    @users[username].showNotifications
   end
 
 end
