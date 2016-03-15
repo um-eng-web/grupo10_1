@@ -45,7 +45,6 @@ class BetHouseAPI
     @betHouseView
   end
 
-  #TODO GENERAL:
   #TODO notificaçoes
   #TODO update do obeserver pattern
 
@@ -104,7 +103,6 @@ class BetHouseAPI
     @users[username].userLogout
   end
 
-  #TODO precisa de testes
   def createBet(username)
     showActiveGames
     gId = @betHouseView.chooseGameId.to_i
@@ -121,7 +119,6 @@ class BetHouseAPI
     end
   end
 
-  #TODO test Observer
   def followGameUser(username)
     showActiveGames
     gId = @betHouseView.chooseGameId.to_i
@@ -130,7 +127,6 @@ class BetHouseAPI
     @users[username].followGame(gId, game)
   end
 
-  #TODO test observer
   def getGameObservers
     showActiveGames
     gId = @betHouseView.chooseGameId.to_i
@@ -142,7 +138,6 @@ class BetHouseAPI
     @users[username].unfollowGame
   end
 
-  #TODO mudar a logica para o lado do user (esta na BetHouseAPI)
   def transactionBetCoinsUser(username)
     mode = @betHouseView.selectTransactionalMode
     @betHouseView.balanceAfterTransaction(@users[username].transactionBetCoins(mode))
@@ -199,7 +194,7 @@ class BetHouseAPI
     @bookies[bookie].changePasswordBookie
   end
 
-  #TODO testar
+
   def gameUpdate (bookiename)
     showActiveGames
     temp = @betHouseView.gameUpdate
@@ -210,7 +205,6 @@ class BetHouseAPI
         @betHouseView.throwUnavailableGame
       else
         @games[temp].updateGameOpen (bookiename)
-
       end
     else
       @betHouseView.throwGameToCloseNotExists
@@ -219,7 +213,6 @@ class BetHouseAPI
 
 
 
-  #TODO adicionei observer
   def createGame(creator)
     newGame = @bookies[creator].createGame(@@gameGlobalId)
     @games[@@gameGlobalId] = newGame
@@ -227,7 +220,6 @@ class BetHouseAPI
     @@gameGlobalId+=1
   end
 
-  #TODO isto ta mal, é preciso ir fechar nos users e bookies
   def gameCloseToBet
     showActiveGames
     temp = @betHouseView.gameClosetoBet
@@ -238,13 +230,14 @@ class BetHouseAPI
     end
   end
 
-  #TODO isto tá mal, é preciso atualizar os saldos dos users e atualizar nos bookies
   def gameEnded
     showActiveGames
     temp = @betHouseView.gameEnded
     if @games.has_key?(temp)
       result = @betHouseView.insertResult
-      #TODO mduar isto
+
+      @users.each_value {|value| value.endGameUpdate(temp, result)}
+
 
       @games[temp].notObservers
       @games[temp].endGame(result)
@@ -253,7 +246,7 @@ class BetHouseAPI
     end
   end
 
-  #TODO isto ta mal, é preciso remover nos users que o estiverem a seguir/apostar
+  #TODO testar
   def removeGame(bookie)
     showActiveGames
     temp = @betHouseView.gameDelete
@@ -266,7 +259,6 @@ class BetHouseAPI
     end
   end
 
-  #TODO adicionei observer/falta testar
   def chooseGameToFollow(bookiename)
     showActiveUnfollowGamesBookie(bookiename)
     game = @betHouseView.chooseGameId.to_i
@@ -278,7 +270,7 @@ class BetHouseAPI
     end
   end
 
-  #TODO adicionei observer/ falta testar
+  #TODO testar
   def chooseGameToUnfollow(bookiename)
     showFollowingGamesBookie(bookiename)
     game = @betHouseView.chooseGameId.to_i

@@ -18,10 +18,6 @@ class ViewGame
     puts "Finished?: #{finished}"
   end
 
-  def updateGameOpen
-    puts "Update game: (team1:team2:Time)"
-    return gets.chomp
-  end
 
   def updateGameFinished
     puts "Update game: (result)"

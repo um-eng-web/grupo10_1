@@ -146,6 +146,10 @@ class User
     @followingGames[game_id] =  game
   end
 
+  def insertHistoryGame(gameId, game)
+    @gamesHistory[gameId] = game
+  end
+
   def unfollowGame(game_id)
     @followingGames.delete(game_id)
   end
@@ -170,5 +174,24 @@ class User
     @betsHistory.delete(bet_id)
   end
 
+
+  def endGameUpdateOpenBets(gameId, result)
+    @openBets.each_value {|value|
+      balance = getBalance
+      bet = value.updateBetResult(gameId, result)
+      if(bet == nil)
+        bet = 0.0
+      end
+      self.setBalance =(balance + bet)
+    }
+  end
+
+  def moveOpenBetToHistory(gameId)
+    @openBets.each_value { |value|
+      if(value.getGameId == gameId)
+        @betsHistory.store(value.getBetId, value)
+      end
+    }
+  end
 
 end

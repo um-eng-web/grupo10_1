@@ -40,7 +40,7 @@ class ControllerBet
       @betModel.setState = "open"
       @betModel.setBetAmount = array[1].to_f
       @betModel.setOdd = game.getSelectedOdd(array[0])
-     # puts @betModel.getOdd
+      return @betModel.getBetAmount.to_f
     else
       @betView.throwNotEnoughFunds
     end
@@ -71,5 +71,27 @@ class ControllerBet
     @betView.deleteBet(@betModel.getBetId, @betModel.getGameId, @betModel.getType, @betModel.getBetAmount,@betModel.getOdd, @betModel.getResult)
   end
 
+  def updateBetResult(gameId, result)
+    if(@betModel.getGameId == gameId)
+      @betModel.setState = "Finished"
+      @betModel.setResult = result
+      if(@betModel.getType == result)
+        return (@betModel.getBetAmount.to_f * @betModel.getOdd.to_f)
+      end
+      else return 0.0
+    end
+  end
+
+  def getGameId
+    @betModel.getGameId
+  end
+
+  def getBetId
+    @betModel.getBetId
+  end
+
+  def getState
+    @betModel.getState
+  end
 
 end
