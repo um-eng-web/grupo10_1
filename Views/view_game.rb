@@ -6,7 +6,7 @@ class ViewGame
     return gets.chomp
   end
 
-  def readGame(id, creator, team1, team2, result, actualOdd, time)
+  def readGame(id, creator, team1, team2, result, actualOdd, time, closedToBet, finished)
     puts "\nGame id: #{id}"
     puts "Game creator: #{creator}"
     puts "Home: #{team1}"
@@ -14,6 +14,8 @@ class ViewGame
     puts "Result: #{result}"
     puts "Actual Odd: #{actualOdd}"
     puts "Hour of Game: #{time}"
+    puts "Closed To Bet?: #{closedToBet}"
+    puts "Finished?: #{finished}"
   end
 
   def updateGameOpen
@@ -25,7 +27,6 @@ class ViewGame
     puts "Update game: (result)"
     return gets.chomp
   end
-
 
   def deleteGame(id, creator, team1, team2, result, actualOdd)
     puts "Game Deleted. (#{id}-#{creator}-#{team1}-#{team2}-#{result}-#{actualOdd})"
@@ -63,7 +64,7 @@ class ViewGame
 
   def printObservers(array)
     puts "Observer"
-    array.each {|val| puts "#{val}"}
+    array.each {|val| puts "#{val.to_s}"}
   end
 
 end

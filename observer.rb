@@ -1,5 +1,6 @@
 class Observer
-  def update
 
+  def update(updateString)
   end
+
 end

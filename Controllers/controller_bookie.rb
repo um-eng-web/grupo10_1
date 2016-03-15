@@ -109,4 +109,11 @@ class ControllerBookie < Observer
       @bookieView.throwNewPasswordException
     end
   end
+
+
+  def update(resultado, notificacao)
+    puts "FUI NOTIICADO ===> #{notificacao}"
+  end
+
+
 end

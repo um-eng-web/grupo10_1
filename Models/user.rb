@@ -15,6 +15,7 @@ class User
   @followingGames
   @gamesHistory
   @transactionHistory
+  @notifications
 
   #initialize method
   def initialize
@@ -34,6 +35,7 @@ class User
     @gamesHistory.default = ControllerGame
     @transactionHistory = Hash.new
     @transactionHistory.default = "Transaction undefined."
+    @notifications = Hash.new
   end
 
   #accessor's methods (getters)
@@ -79,6 +81,10 @@ class User
 
   def getBetId
     @@betId
+  end
+
+  def getNotifications
+    @notifications
   end
 
   #setters
@@ -128,6 +134,10 @@ class User
 
   def incrementBetId
     @@betId += 1
+  end
+
+  def setNotifications=(notifi)
+    @notifications = notifi
   end
 
 

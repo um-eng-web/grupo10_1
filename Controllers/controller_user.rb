@@ -130,12 +130,12 @@ class ControllerUser < Observer
     end
   end
 
-  #bet method
   def bet(idGame, game)
     bet = ControllerBet.new
     bet.createBet(@userModel.getBetId, idGame, game, @userModel.getBalance.to_f)
     @userModel.insertOpenBet(@userModel.getBetId, bet)
     @userModel.insertBetHistory(@userModel.getBetId, bet)
+    @userModel.insertFollowGame(idGame, game)
     @userModel.incrementBetId
   end
 
@@ -146,6 +146,12 @@ class ControllerUser < Observer
   def userLogout
     @userModel.setLogged = false
     @userView.loggedOut
+  end
+
+  #TODO fazer isto
+  def update(resultado, notificacao)
+
+    puts "FUI NOTIICADO ===> #{notificacao}"
   end
 
 

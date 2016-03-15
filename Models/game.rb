@@ -1,7 +1,6 @@
 require_relative '../Controllers/controller_odd'
 
 class Game
-
   #instance variables
   @gameId
   @gameCreator
@@ -12,6 +11,7 @@ class Game
   @gameTime #inicio do jogo
   @finished #boolean para dizer se ja acabou
   @closedToBet  #boolean para dizer se esta aberto ou fechado para apostar
+
 
   #TODO ajustar o tamanho do array
   def initialize
@@ -24,7 +24,6 @@ class Game
     @gameTime = nil
     @finished = false
     @closedToBet = false
-    @observers = Array.new
   end
 
   #accessor methods
@@ -64,9 +63,6 @@ class Game
     @closedToBet
   end
 
-  def getObservers
-    @observers
-  end
 
 
   #setter's
@@ -106,10 +102,6 @@ class Game
     @closedToBet = closed
   end
 
-  def setObservers=(observers)
-    @observers = observers
-  end
-
 
   #add new odd method
   def insertOdd(newOdd)
@@ -126,14 +118,5 @@ class Game
     return @odds.last
   end
 
-  #add new observer method
-  def insertObserver(observer)
-    @observers << observer
-  end
-
-  #remove observer method
-  def removeObserver(index)
-    @observers.delete_at(index)
-  end
 
 end

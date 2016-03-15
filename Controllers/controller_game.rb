@@ -1,13 +1,16 @@
 require_relative '../Controllers/controller_odd'
 require_relative '../Models/game'
 require_relative '../Views/view_game'
-require 'observer'
+require_relative '../subject'
+
 class ControllerGame
-  include Observable
+  include Subject
+
   @gameModel
   @gameView
 
   def initialize
+    super()
     @gameModel = Game.new
     @gameView = ViewGame.new
   end
@@ -43,14 +46,14 @@ class ControllerGame
     @gameModel.setTeam2 = array[1]
     @gameModel.setGameTime = array[2]
     insertOdd(creator)
-    @gameModel.insertObserver(creator)
     return @gameModel
     end
 
-
   def readGame
     odd = @gameModel.actualOdd
-    @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s, @gameModel.getGameTime)
+    @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator,
+                       @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult,
+                       odd.to_s, @gameModel.getGameTime, @gameModel.getClosedToBet, @gameModel.getFinished)
   end
 
   #TODO ver o que posso editar
@@ -81,9 +84,6 @@ class ControllerGame
     newOdd.createOdd (creator)
     @gameModel.insertOdd(newOdd)
   end
-
-
-
 
   #method to remove an odd from an array of game odds
   def removeOdd
@@ -133,14 +133,15 @@ class ControllerGame
       @gameModel.setResult = result
       @gameView.successGameEndedToBet
     end
-    end
+  end
 
-    def listOddsGame
+  def listOddsGame
       @gameView.printOdds(@gameModel.getOdds)
     end
 
-  def printObservers
-    @gameView.printObservers(@gameModel.getObservers)
+
+  def getObs
+    @gameView.printObservers(getObservers)
   end
 
   def gamesUnfollowBookie(bookiename)
@@ -159,20 +160,21 @@ class ControllerGame
     end
   end
 
-  def insertObserver(bookiename)
-    @gameModel.insertObserver(bookiename)
+  #Observer Pattern method
+  def addObserver(bookiename)
+    registerObserver(bookiename)
   end
 
-  def removeObserver(bookiename)
-    index = @gameModel.getObservers.index(bookiename)
-    @gameModel.removeObserver(index)
+  #Observer pattern method
+  #TODO falta testar
+  def remObserver(bookiename)
+    index = @observers.index(bookiename)
+    removeObserver(index)
   end
+
+  #TODO acabar isto
+  def notObservers
+    notifyObservers("Hell","HELLO")
+  end
+
 end
-
-
-
-#g = ControllerGame.new
-#g.createGame(0,"mister") #spoting:braga:qwe   mister:1:2:3
-#g.readGame
-#g.insertOdd #outro:2:3:4
-#g.removeOdd

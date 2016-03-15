@@ -46,7 +46,7 @@ class Menu
       when 0
         nil
       else
-        puts"Invalid Option"
+        puts "Invalid Option"
         menuAuthReg
     end
   end
@@ -62,6 +62,7 @@ class Menu
     puts "7- Transact BetCoins"
     puts "8- Change Password"
     puts "9- Logout"
+    puts "10- Show Game Observers"
 
     option = gets.to_i
     case option
@@ -75,6 +76,7 @@ class Menu
         @house.unfollowGameUser(username)
         menuUser(username)
       when 4
+        #TODO
         #notifications
         menuUser(username)
       when 5
@@ -91,6 +93,10 @@ class Menu
         menuUser(username)
       when 9
         @house.userLogout(username)
+        menuAuthReg
+
+      when 10
+        @house.getGameObservers
         menuAuthReg
       else
         puts"Invalid Option"
@@ -119,6 +125,7 @@ class Menu
         @house.showFollowingGamesUser(username)
         listMenuUser(username)
       when 4
+        #TODO
         #@house.showAllNotificationsUser(username)
         listMenuUser(username)
       when 5
@@ -152,40 +159,29 @@ class Menu
         @house.createGame(bookiename)
         menuBookie(bookiename)
       when 2
-        #closeGame
-        @house.showActiveGames
         @house.gameCloseToBet
         menuBookie(bookiename)
       when 3
-        @house.showActiveGames
         @house.gameEnded
         menuBookie(bookiename)
       when 4
         #notifications
         menuBookie(bookiename)
       when 5
-        #editGame/updateGame
-        @house.showActiveGames
-        @house.showHistoryGames
+        #pus apenas o active games, nao faz sentido mudar um jogo que esta no hitorico
         @house.gameUpdate (bookiename)
         menuBookie(bookiename)
       when 6
-        #deleteGame
-        @house.showActiveGames
-        @house.showHistoryGames
+        #pus apenas o active games, nao faz sentido remover um jogo que esta no hitorico
         @house.removeGame (bookiename)
         menuBookie(bookiename)
       when 7
-        #followGameBookie
-        @house.showActiveUnfollowGamesBookie(bookiename)
         @house.chooseGameToFollow(bookiename)
         menuBookie(bookiename)
       when 8
-        #unfollowGameBookie
         @house.chooseGameToUnfollow(bookiename)
         menuBookie(bookiename)
       when 9
-        #ChangePassword
         @house.changePassawordBookie(bookiename)
         menuBookie(bookiename)
       when 10
@@ -224,24 +220,19 @@ class Menu
         @house.showCreatedGamesBookie(bookiename)
         listMenuBookie(bookiename)
       when 4
-        #gamesHistory
         @house.showHistoryGames
         listMenuBookie(bookiename)
       when 5
-        #odds of game
-        @house.showActiveGames
-        @house.showHistoryGames
         @house.showListOddsOfAGame
         listMenuBookie(bookiename)
       when 6
-        #online users
         @house.showOnlineUsers
         listMenuBookie(bookiename)
       when 7
-        #all users
         @house.showAllUsers
         listMenuBookie(bookiename)
       when 8
+        #TODO
         #notifications
         listMenuBookie(bookiename)
       when 0
