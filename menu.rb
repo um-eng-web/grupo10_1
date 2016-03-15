@@ -14,7 +14,7 @@ class Menu
 
   def menuAuthReg
     puts "BetESS Ruby"
-    puts "Authentication/Regestration:"
+    puts "Authentication/Registration:"
     puts "1- User"
     puts "2- Bookie"
     puts "3- Create User"
@@ -24,11 +24,19 @@ class Menu
     option = gets.to_i
     case option
       when 1
-        #TODO check to proceed
         username = @house.authenticateUser
-        menuUser(username)
+        if(username != nil)
+          menuUser(username)
+        else
+          menuAuthReg
+        end
       when 2
-        @house.authenticateBookie
+        bookiename = @house.authenticateBookie
+        if(bookiename != nil)
+          menuBookie(bookiename)
+        else
+          menuAuthReg
+        end
       when 3
         @house.registerUser
         menuAuthReg
@@ -37,10 +45,12 @@ class Menu
         menuAuthReg
       when 0
         nil
+      else
+        puts "Invalid Option"
+        menuAuthReg
     end
   end
 
-  #TODO insert logout option
   def menuUser(username)
     puts "Welcome, #{username}"
     puts "1- Bet"
@@ -48,10 +58,11 @@ class Menu
     puts "3- Unfollow Game"
     puts "4- Notifications"
     puts "5- List Menu"
-    puts "6- Profile"
+    puts "6- Show Profile"
     puts "7- Transact BetCoins"
     puts "8- Change Password"
-    puts "0- Back"
+    puts "9- Logout"
+    puts "10- Show Game Observers"
 
     option = gets.to_i
     case option
@@ -65,13 +76,14 @@ class Menu
         @house.unfollowGameUser(username)
         menuUser(username)
       when 4
+        #TODO
         #notifications
         menuUser(username)
       when 5
         listMenuUser(username)
         menuUser(username)
       when 6
-        #@house.
+        @house.getUsers[username].readUser
         menuUser(username)
       when 7
         @house.transactionBetCoinsUser(username)
@@ -79,8 +91,16 @@ class Menu
       when 8
         @house.changePassawordUser(username)
         menuUser(username)
-      when 0
+      when 9
+        @house.userLogout(username)
         menuAuthReg
+
+      when 10
+        @house.getGameObservers
+        menuAuthReg
+      else
+        puts"Invalid Option"
+        menuUser(username)
     end
   end
 
@@ -105,6 +125,7 @@ class Menu
         @house.showFollowingGamesUser(username)
         listMenuUser(username)
       when 4
+        #TODO
         #@house.showAllNotificationsUser(username)
         listMenuUser(username)
       when 5
@@ -112,10 +133,12 @@ class Menu
         listMenuUser(username)
       when 0
         menuUser(username)
+      else
+        puts"Invalid Option"
+        listMenuUser(username)
     end
   end
 
-  #TODO insert logout option
   def menuBookie(bookiename)
     puts "Welcome, #{bookiename}"
     puts "1- Create Game"
@@ -126,8 +149,9 @@ class Menu
     puts "6- Delete Game"
     puts "7- Follow Game"
     puts "8- Unfollow Game"
-    puts "9- List Menu"
-    puts "0- Back"
+    puts "9- Change Password"
+    puts "10- List Menu"
+    puts "11- Logout"
 
     option = gets.to_i
     case option
@@ -135,30 +159,40 @@ class Menu
         @house.createGame(bookiename)
         menuBookie(bookiename)
       when 2
-        #closeGameBet
+        @house.gameCloseToBet
         menuBookie(bookiename)
       when 3
-        #endGame
+        @house.gameEnded
         menuBookie(bookiename)
       when 4
         #notifications
         menuBookie(bookiename)
       when 5
-        #editGame/updateGame
+        #pus apenas o active games, nao faz sentido mudar um jogo que esta no hitorico
+        @house.gameUpdate (bookiename)
         menuBookie(bookiename)
       when 6
-        #deleteGame
+        #pus apenas o active games, nao faz sentido remover um jogo que esta no hitorico
+        @house.removeGame (bookiename)
         menuBookie(bookiename)
       when 7
-        #followGameBookie
+        @house.chooseGameToFollow(bookiename)
         menuBookie(bookiename)
       when 8
-        #unfollowGameBookie
+        @house.chooseGameToUnfollow(bookiename)
         menuBookie(bookiename)
       when 9
+        @house.changePassawordBookie(bookiename)
+        menuBookie(bookiename)
+      when 10
         listMenuBookie(bookiename)
-      when 0
+      when 11
+        @house.bookieLogout(bookiename)
         menuAuthReg
+
+      else
+        puts"Invalid Option"
+        menuBookie(bookiename)
     end
   end
 
@@ -168,9 +202,9 @@ class Menu
     puts "2- List Following Games"
     puts "3- List Created Games"
     puts "4- List Games History"
-    puts "5- List Online Users"
-    puts "6- List All Users"
-    puts "7- List Odds"
+    puts "5- List Game's Odds History"
+    puts "6- List Online Users"
+    puts "7- List All Users"
     puts "8- List Notifications"
     puts "0- Back"
 
@@ -186,18 +220,19 @@ class Menu
         @house.showCreatedGamesBookie(bookiename)
         listMenuBookie(bookiename)
       when 4
-        #gamesHistory
+        @house.showHistoryGames
         listMenuBookie(bookiename)
       when 5
-        #online users
+        @house.showListOddsOfAGame
         listMenuBookie(bookiename)
       when 6
-        #all users
+        @house.showOnlineUsers
         listMenuBookie(bookiename)
       when 7
-        #list odds
+        @house.showAllUsers
         listMenuBookie(bookiename)
       when 8
+        #TODO
         #notifications
         listMenuBookie(bookiename)
       when 0

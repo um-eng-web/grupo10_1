@@ -21,4 +21,22 @@ class ViewBookie
     puts "Delete bookie. #{bookiename}"
   end
 
+  def loggedOut
+    puts "Logout successfully done"
+  end
+
+  def changePassword
+    puts "Insert Old Password: (oldPassword)"
+    old = gets.chomp
+    puts "Insert New Password: (newPassword)"
+    new = gets.chomp
+    puts "Confirm New Password: (confirmPassword)"
+    confirm = gets.chomp
+    return old, new, confirm
+  end
+
+  def throwNewPasswordException
+    puts "ERROR: Incorrect Password."
+  end
+
 end

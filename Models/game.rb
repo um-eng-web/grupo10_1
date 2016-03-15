@@ -1,7 +1,6 @@
 require_relative '../Controllers/controller_odd'
 
 class Game
-
   #instance variables
   @gameId
   @gameCreator
@@ -12,6 +11,7 @@ class Game
   @gameTime #inicio do jogo
   @finished #boolean para dizer se ja acabou
   @closedToBet  #boolean para dizer se esta aberto ou fechado para apostar
+
 
   #TODO ajustar o tamanho do array
   def initialize
@@ -62,6 +62,7 @@ class Game
   def getClosedToBet
     @closedToBet
   end
+
 
 
   #setter's
@@ -116,5 +117,6 @@ class Game
   def actualOdd
     return @odds.last
   end
+
 
 end

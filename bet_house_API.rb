@@ -45,11 +45,7 @@ class BetHouseAPI
     @betHouseView
   end
 
-  #TODO fazer uma timeline com todos os acontecimentos do user
-
   #users interface
-  #TODO bet method
-  #TODO showUserProfile
   def registerUser
     newUser = ControllerUser.new
     newUser.createUser
@@ -71,22 +67,31 @@ class BetHouseAPI
   def authenticateUser
     temp = @betHouseView.authenticateUser
     array = temp.split(":")
-    if(@users.has_key?(array[0]))
-      @users[array[0]].authenticateUser(array[0],array[1])
+    if(@users.has_key?(array[0]) && @users[array[0]].authenticateUser(array[0],array[1]))
       return array[0]
     else
       @betHouseView.throwUsernameNotExistError
     end
-
   end
 
+  #TODO Observer
   def followGameUser(username)
-    @games.each_value{|value| value.readGame}
+    showActiveGames
     gId = @betHouseView.chooseGameId.to_i
     game = @games[gId]
+    @games[gId].addObserver(@users[username])
     @users[username].followGame(gId, game)
+
   end
 
+  #TODO test observer
+  def getGameObservers
+    showActiveGames
+    gId = @betHouseView.chooseGameId.to_i
+    @games[gId].getObs
+  end
+
+  #TODO falta remover observer
   def unfollowGameUser(username)
     @users[username].unfollowGame
   end
@@ -115,7 +120,11 @@ class BetHouseAPI
   end
 
   def changePassawordUser(username)
-    @users[username].changePassword
+    @users[username].changePasswordUser
+  end
+
+  def userLogout(username)
+    @users[username].userLogout
   end
 
   #bookie interface
@@ -124,7 +133,7 @@ class BetHouseAPI
     newBookie.createBookie
     if(@bookies.has_key?(newBookie.getBookieModel.getBookieName) == false)
       @bookies[newBookie.getBookieModel.getBookieName] = newBookie
-      else @betHouseView.throwUsernameAlreadyExists
+    else @betHouseView.throwUsernameAlreadyExists
     end
   end
 
@@ -135,41 +144,40 @@ class BetHouseAPI
   def authenticateBookie
     temp = @betHouseView.authenticateBookie
     array = temp.split(":")
-    if @bookies.has_key?(array[0])
-      @bookies[array[0]].authenticateBookie(array[0],array[1])
+    if @bookies.has_key?(array[0]) && @bookies[array[0]].authenticateBookie(array[0],array[1])
+      return array[0]
     else
       @betHouseView.throwBookieNotExistError
     end
-
   end
-
 
   #TODO testar isto
   def showFollowingGamesBookie(bookie)
     @bookies[bookie].showFollowingGames
   end
 
-  #TODO testar isto
   def showCreatedGamesBookie(bookie)
     @bookies[bookie].showCreatedGames
   end
 
-  #TODO testar isto
+  #TODO adicionei observer
   def createGame(creator)
     newGame = @bookies[creator].createGame(@@gameGlobalId)
     @games[@@gameGlobalId] = newGame
+    @games[@@gameGlobalId].addObserver(@bookies[creator])
     @@gameGlobalId+=1
   end
 
-
   #bet interface
+  #TODO adicionei observer
   def createBet(username)
-    @games.each_value{|value| value.readGame}
+    showActiveGames
     gId = @betHouseView.chooseGameId.to_i
     if(@games.has_key?(gId))
       game = @games[gId]
       if(game.getClosedToBet == false)
         @users[username].bet(gId, game)
+        @games[gId].addObserver(@users[username])
       else
         @betHouseView.throwGameClosedToBetError
       end
@@ -178,7 +186,6 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar isto
   def showActiveGames
     @games.each_value{|value|
       if(value.getClosedToBet == false)
@@ -187,39 +194,136 @@ class BetHouseAPI
       }
   end
 
+  def showActiveUnfollowGamesBookie(bookiename)
+
+    @games.each_value{|value|
+      if(value.getClosedToBet == false && value.gamesUnfollowBookie(bookiename))
+        value.readGame
+      end
+    }
+  end
+
+  def chooseGameById
+    @betHouseView.chooseGameId.to_i
+  end
+
+  def showHistoryGames
+    @games.each_value{|value|
+      if(value.getFinished == true)
+        value.readGame
+      end
+    }
+  end
+
+  def showListOddsOfAGame
+    showActiveGames
+    showHistoryGames
+    temp = @betHouseView.listOddsGame
+    if @games.has_key?(temp)
+      @games[temp].listOddsGame
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  #TODO testar isto
+  def showOnlineUsers
+    puts "Online Users:"
+    @users.each_value{|value|
+      if(value.getLogged == true)
+        value.readUser
+      end
+    }
+  end
+
+  #TODO testar isto + ver o puts
+  def showAllUsers
+    puts "All Users:"
+    @users.each_value{|value| value.readUser}
+  end
+
+  def gameCloseToBet
+    showActiveGames
+    temp = @betHouseView.gameClosetoBet
+    if @games.has_key?(temp)
+      @games[temp].gameClosedToBet
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  def gameEnded
+      showActiveGames
+      temp = @betHouseView.gameEnded
+      if @games.has_key?(temp)
+        result = @betHouseView.insertResult
+        #TODO mduar isto
+        @games[temp].notObservers
+        @games[temp].endGame (result)
+      else
+        @betHouseView.throwGameToCloseNotExists
+      end
+    end
+
+  def removeGame(bookie)
+    showActiveGames
+    temp = @betHouseView.gameDelete
+    if @games.has_key?(temp)
+      @games.delete(temp)
+      @bookies[bookie].removeCreatedGame(temp)
+      @betHouseView.throwGameDeleted
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  def gameUpdate (bookiename)
+    showActiveGames
+    temp = @betHouseView.gameUpdate
+    if @games.has_key?(temp)
+      if @games[temp].getFinished
+        @games[temp].updateGameFinished(bookiename)
+      elsif @games[temp].getClosedToBet
+        @betHouseView.throwUnavailableGame
+      else
+        @games[temp].updateGameOpen (bookiename)
+
+      end
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  def bookieLogout(bookie)
+    @bookies[bookie].bookieLogout
+  end
+
+  def changePassawordBookie(bookie)
+    @bookies[bookie].changePasswordBookie
+  end
+
+  #TODO adicionei observer/falta testar
+  def chooseGameToFollow(bookiename)
+    showActiveUnfollowGamesBookie(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesUnfollowBookie(bookiename) && !(@games[game].getFinished)
+        @bookies[bookiename].followGame(@games[game])
+        @games[game].addObserver(@bookies[bookiename])
+    else
+      @betHouseView.throwGameAlreadyFollowed
+    end
+  end
+
+  #TODO adicionei observer/ falta testar
+  def chooseGameToUnfollow(bookiename)
+    showFollowingGamesBookie(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesFollowBookie(bookiename)
+      @bookies[bookiename].unfollowGame(@games[game])
+      @games[game].remObserver(@bookies[bookiename])
+    else
+      @betHouseView.throwGameAlreadyUnfollowed
+    end
+  end
+
 end
-#house = BetHouseAPI.new
-#house.registerUser #voluntario:4:ricardo:4321
-#house.registerBookie  #onofrio:novapass
-
-#house.registerUser #zde:12:zé:123
-#house.registerUser #basofe:64:helder:123
-#house.removeUser("basofe")
-#house.viewUsers
-
-#house.authenticateUser  #voluntario:4
-#house.authenticateBookie  #onofrio:novapass
-
-#house.viewUsers
-#house.viewBookies
-
-#house.createGame("onofrio") #Sporting:braga:t1   #velhote:1:2:3
-#house.createGame("velhote") #Arsenal:Barcelona:t2   #outro:2:3:4
-
-#house.followGameUser("voluntario")
-#house.showFollowingGamesUser("voluntario")
-#puts "---------------------"
-#house.unfollowGameUser("voluntario")
-#house.showFollowingGamesUser("voluntario")
-#puts "---------------------"
-#house.transactionBetCoinsUser("voluntario")
-#house.transactionBetCoinsUser("voluntario")
-#puts "---------------------"
-#house.changePassawordUser("voluntario")
-
-#puts "---------------------"
-#house.createBet("voluntario")
-#puts "OpenBetsUser"
-#house.showOpenBetsUser("voluntario")
-#puts "BetsHistoryUser"
-#house.showBetsHistoryUser("voluntario")

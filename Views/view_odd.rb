@@ -1,7 +1,7 @@
 class ViewOdd
 
   def createOdd
-    puts "Create new odd: (bookie:odd1:oddX:odd2)"
+    puts "Create new odd: (odd1:oddX:odd2)"
     return gets.chomp
   end
 
@@ -14,7 +14,7 @@ class ViewOdd
   end
 
   def updateOdd
-    puts "Create new odd: (bookie:odd1:oddX:odd2)"
+    puts "Create new odd: (odd1:oddX:odd2)"
     return gets.chomp
   end
 
