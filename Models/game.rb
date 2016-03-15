@@ -24,6 +24,7 @@ class Game
     @gameTime = nil
     @finished = false
     @closedToBet = false
+    @observers = Array.new
   end
 
   #accessor methods
@@ -61,6 +62,10 @@ class Game
 
   def getClosedToBet
     @closedToBet
+  end
+
+  def getObservers
+    @observers
   end
 
 
@@ -101,6 +106,10 @@ class Game
     @closedToBet = closed
   end
 
+  def setObservers=(observers)
+    @observers = observers
+  end
+
 
   #add new odd method
   def insertOdd(newOdd)
@@ -115,6 +124,16 @@ class Game
   #get the most recent odd
   def actualOdd
     return @odds.last
+  end
+
+  #add new observer method
+  def insertObserver(observer)
+    @observers << observer
+  end
+
+  #remove observer method
+  def removeObserver(index)
+    @observers.delete_at(index)
   end
 
 end

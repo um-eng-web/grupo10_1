@@ -16,7 +16,7 @@ class ViewUser
   end
 
   def updateUser
-    puts "Insira os dados do utilizador (username:password:name:balance):"
+    puts "Insira os dados do utilizador (username:name):"
     return gets.chomp
   end
 
@@ -46,6 +46,10 @@ class ViewUser
 
   def throwNewPasswordException
     puts "ERROR: Incorrect Password."
+  end
+
+  def loggedOut
+    puts "Logout successfully done"
   end
 
 end

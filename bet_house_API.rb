@@ -79,14 +79,13 @@ class BetHouseAPI
   def authenticateUser
     temp = @betHouseView.authenticateUser
     array = temp.split(":")
-    if(@users.has_key?(array[0]))
-      @users[array[0]].authenticateUser(array[0],array[1])
+    if(@users.has_key?(array[0]) && @users[array[0]].authenticateUser(array[0],array[1]))
       return array[0]
     else
       @betHouseView.throwUsernameNotExistError
     end
-
   end
+
 
   def followGameUser(username)
     showActiveGames
@@ -116,6 +115,7 @@ class BetHouseAPI
   end
 
 
+
   #TODO mudar a logica para o lado do user (esta na BetHouseAPI)
   def transactionBetCoinsUser(username)
     mode = @betHouseView.selectTransactionalMode
@@ -123,7 +123,11 @@ class BetHouseAPI
   end
 
   def changePassawordUser(username)
-    @users[username].changePassword
+    @users[username].changePasswordUser
+  end
+
+  def userLogout(username)
+    @users[username].userLogout
   end
 
   #bookie interface
@@ -132,7 +136,7 @@ class BetHouseAPI
     newBookie.createBookie
     if(@bookies.has_key?(newBookie.getBookieModel.getBookieName) == false)
       @bookies[newBookie.getBookieModel.getBookieName] = newBookie
-      else @betHouseView.throwUsernameAlreadyExists
+    else @betHouseView.throwUsernameAlreadyExists
     end
   end
 
@@ -143,13 +147,11 @@ class BetHouseAPI
   def authenticateBookie
     temp = @betHouseView.authenticateBookie
     array = temp.split(":")
-    if @bookies.has_key?(array[0])
-      @bookies[array[0]].authenticateBookie(array[0],array[1])
+    if @bookies.has_key?(array[0]) && @bookies[array[0]].authenticateBookie(array[0],array[1])
       return array[0]
     else
       @betHouseView.throwBookieNotExistError
     end
-
   end
 
 
@@ -158,12 +160,10 @@ class BetHouseAPI
     @bookies[bookie].showFollowingGames
   end
 
-  #TODO testar isto
   def showCreatedGamesBookie(bookie)
     @bookies[bookie].showCreatedGames
   end
 
-  #TODO testar isto
   def createGame(creator)
     newGame = @bookies[creator].createGame(@@gameGlobalId)
     @games[@@gameGlobalId] = newGame
@@ -188,13 +188,42 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar isto
   def showActiveGames
     @games.each_value{|value|
       if(value.getClosedToBet == false)
         value.readGame
       end
       }
+  end
+
+  def showActiveUnfollowGamesBookie(bookiename)
+
+    @games.each_value{|value|
+      if(value.getClosedToBet == false && value.gamesUnfollowBookie(bookiename))
+        value.readGame
+      end
+    }
+  end
+
+  def chooseGameById
+    @betHouseView.chooseGameId.to_i
+  end
+
+  def showHistoryGames
+    @games.each_value{|value|
+      if(value.getFinished == true)
+        value.readGame
+      end
+    }
+  end
+
+  def showListOddsOfAGame
+    temp = @betHouseView.listOddsGame
+    if @games.has_key?(temp)
+      @games[temp].listOddsGame
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
   end
 
   #TODO testar isto
@@ -213,11 +242,86 @@ class BetHouseAPI
     @users.each_value{|value| value.readUser}
   end
 
+  def gameCloseToBet
+    temp = @betHouseView.gameClosetoBet
+    if @games.has_key?(temp)
+      @games[temp].gameClosedToBet
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+    def gameEnded
+      temp = @betHouseView.gameEnded
+      if @games.has_key?(temp)
+        result = @betHouseView.insertResult
+        @games[temp].endGame (result)
+      else
+        @betHouseView.throwGameToCloseNotExists
+      end
+    end
+
+  def removeGame(bookie)
+    temp = @betHouseView.gameDelete
+    if @games.has_key?(temp)
+      @games.delete(temp)
+      @bookies[bookie].removeCreatedGame(temp)
+      @betHouseView.throwGameDeleted
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  def gameUpdate (bookiename)
+    temp = @betHouseView.gameUpdate
+    if @games.has_key?(temp)
+      if @games[temp].getFinished
+        @games[temp].updateGameFinished(bookiename)
+      elsif @games[temp].getClosedToBet
+        @betHouseView.throwUnavailableGame
+      else
+        @games[temp].updateGameOpen (bookiename)
+
+      end
+    else
+      @betHouseView.throwGameToCloseNotExists
+    end
+  end
+
+  def bookieLogout(bookie)
+    @bookies[bookie].bookieLogout
+  end
+
+  def changePassawordBookie(bookie)
+    @bookies[bookie].changePasswordBookie
+  end
+
+  def chooseGameToFollow(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesUnfollowBookie(bookiename) && !(@games[game].getFinished)
+        @bookies[bookiename].followGame(@games[game])
+        @games[game].insertObserver(bookiename)
+    else
+      @betHouseView.throwGameAlreadyFollowed
+    end
+  end
+
+  def chooseGameToUnfollow(bookiename)
+    showFollowingGamesBookie(bookiename)
+    game = @betHouseView.chooseGameId.to_i
+    if @games.has_key?(game) && @games[game].gamesFollowBookie(bookiename)
+      @bookies[bookiename].unfollowGame(@games[game])
+      @games[game].removeObserver(bookiename)
+    else
+      @betHouseView.throwGameAlreadyUnfollowed
+    end
+  end
+
 end
-house = BetHouseAPI.new
-house.registerBookie  #onofrio:novapass
-house.registerUser
-house.authenticateUser
+#house = BetHouseAPI.new
+#house.registerBookie  #onofrio:novapass
+#house.registerUser
+#house.authenticateUser
 
 
 #house.createGame("onofrio")
@@ -226,5 +330,5 @@ house.authenticateUser
 
 #house.showActiveGames
 
-house.showOnlineUsers
-house.showAllUsers
+#house.showOnlineUsers
+#house.showAllUsers

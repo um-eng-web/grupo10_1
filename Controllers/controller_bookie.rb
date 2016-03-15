@@ -1,7 +1,8 @@
 require_relative '../Models/bookie'
 require_relative '../Views/view_bookie'
+require_relative '../observer'
 
-class ControllerBookie
+class ControllerBookie < Observer
 
   @bookieModel
   @bookieView
@@ -65,6 +66,9 @@ class ControllerBookie
   def authenticateBookie(bookiename, password)
     if (@bookieModel.getBookieName == bookiename && @bookieModel.getPassword == password && @bookieModel.getLogged == false)
       @bookieModel.setLogged = true
+      return true
+    else
+      return false
     end
   end
 
@@ -74,10 +78,35 @@ class ControllerBookie
     followed.each_value{|value| puts value.readGame}
   end
 
+  def followGame(game)
+    @bookieModel.insertFollowingGame(game.getGameModel.getGameId,game)
+  end
+
+  def unfollowGame(game)
+    @bookieModel.removeFollowedGame(game.getGameModel.getGameId,game)
+  end
+  #
   #method to show the created games
   def showCreatedGames
     created = @bookieModel.getCreatedGames
     created.each_value{|value| puts value.readGame}
   end
 
+  def removeCreatedGame(gameId)
+    @bookieModel.getCreatedGames.delete(gameId)
+  end
+
+  def bookieLogout
+    @bookieModel.setLogged = false
+    @bookieView.loggedOut
+  end
+
+  def changePasswordBookie
+    passwords = @bookieView.changePassword
+    if (passwords[0] == @bookieModel.getPassword && passwords[1] == passwords[2])
+      @bookieModel.setPassword = passwords[1]
+    else
+      @bookieView.throwNewPasswordException
+    end
+  end
 end

@@ -11,11 +11,11 @@ class ViewBetHouseAPI
   end
 
   def throwUsernameNotExistError
-    puts "Error: Username does not exists!"
+    puts "Error: Username does not exists or password is incorrect!"
     end
 
   def throwBookieNotExistError
-    puts "Error: Bookie does not exists!"
+    puts "Error: Bookie does not exists or password is incorrect!"
   end
 
   def chooseGameId
@@ -46,5 +46,55 @@ class ViewBetHouseAPI
 
   def throwPasswordAlreadyExists
     puts "ERROR: Choose another password."
+  end
+
+  def throwGameToCloseNotExists
+    puts "ERROR: Choose another Game."
+  end
+
+
+  def gameClosetoBet
+    puts "Insert the ID of the game you want to end the bets"
+    return gets.chomp.to_i
+  end
+
+  def gameEnded
+    puts "Insert the ID of the game you want to end"
+    return gets.chomp.to_i
+  end
+
+  def gameDelete
+    puts "Insert the ID of the game you want to delete"
+    return gets.chomp.to_i
+  end
+
+  def throwGameDeleted
+    puts"Game successfully Removed"
+  end
+
+  def gameUpdate
+    puts "Insert the ID of the game you want to update"
+    return gets.chomp.to_i
+  end
+
+  def listOddsGame
+    puts "Insert the ID of the game you want to list the odds"
+    return gets.chomp.to_i
+  end
+  def insertResult
+    puts "Insert the result of the game you want to end, please."
+    return gets.chomp
+  end
+
+  def throwUnavailableGame
+    puts "This game is not available to be updated."
+  end
+
+  def throwGameAlreadyFollowed
+    puts"You already followed the game you've choosed or you can't follow it"
+  end
+
+  def throwGameAlreadyUnfollowed
+    puts"You already unfollowed the game you've choosed or you can't unfollow it"
   end
 end

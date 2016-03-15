@@ -1,8 +1,9 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
 require 'net/smtp'
+require_relative '../observer'
 
-class ControllerUser
+class ControllerUser < Observer
 
   #instance variables
   @userModel
@@ -49,14 +50,11 @@ class ControllerUser
     @userView.readUser(@userModel.getUsername, @userModel.getName, @userModel.getBalance, @userModel.getLogged, @userModel.getOpenBets.length, @userModel.getFollowingGames.length)
   end
 
-  #TODO ver o que posso editar
   def updateUser
     var = @userView.updateUser
     array = var.split(":")
     @userModel.setUsername =array[0]
-    @userModel.setPassword = array[1]
-    @userModel.setName = array[2]
-    @userModel.setBalance = array[3].to_f
+    @userModel.setName = array[1]
   end
 
   def deleteUser
@@ -68,6 +66,9 @@ class ControllerUser
   def authenticateUser(username, password)
     if (@userModel.getUsername == username && @userModel.getPassword == password && @userModel.getLogged == false)
       @userModel.setLogged = true
+      return true
+    else
+      return false
     end
   end
 
@@ -120,7 +121,7 @@ class ControllerUser
   end
 
   #change password method
-  def changePassword
+  def changePasswordUser
     passwords = @userView.changePassword
     if (passwords[0] == @userModel.getPassword && passwords[1] == passwords[2])
       @userModel.setPassword = passwords[1]
@@ -140,6 +141,11 @@ class ControllerUser
 
   def getLogged
     @userModel.getLogged
+  end
+
+  def userLogout
+    @userModel.setLogged = false
+    @userView.loggedOut
   end
 
 

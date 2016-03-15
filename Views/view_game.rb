@@ -16,10 +16,16 @@ class ViewGame
     puts "Hour of Game: #{time}"
   end
 
-  def updateGame
-    puts "Create new game: (id:creator:team1:team2:result)"
+  def updateGameOpen
+    puts "Update game: (team1:team2:Time)"
     return gets.chomp
   end
+
+  def updateGameFinished
+    puts "Update game: (result)"
+    return gets.chomp
+  end
+
 
   def deleteGame(id, creator, team1, team2, result, actualOdd)
     puts "Game Deleted. (#{id}-#{creator}-#{team1}-#{team2}-#{result}-#{actualOdd})"
@@ -32,6 +38,32 @@ class ViewGame
     array.each_with_index {|val, index| puts "#{val} - #{index}"}
     puts "\nSelect the odd index you want to remove:"
     return gets.chomp.to_i
+  end
+
+  def printOdds (array)
+    puts "Odd - Index:"
+    array.each_with_index {|val, index| puts "#{val} - #{index}"}
+  end
+
+  def successGameClosedToBet
+    puts"Game Closed to Bet Successfuly"
+  end
+
+  def successGameEndedToBet
+    puts"Game Ended Successfuly"
+  end
+
+  def gameToCloseAlreadyExists
+    puts"The Game you want to close, is already closed!"
+  end
+
+  def gameToEndAlreadyExists
+    puts"The Game you want to end, is already ended!"
+  end
+
+  def printObservers(array)
+    puts "Observer"
+    array.each {|val| puts "#{val}"}
   end
 
 end
