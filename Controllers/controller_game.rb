@@ -3,9 +3,6 @@ require_relative '../Models/game'
 require_relative '../Views/view_game'
 require_relative '../subject'
 
-
-
-
 class ControllerGame
   include Subject
 
@@ -54,7 +51,9 @@ class ControllerGame
 
   def readGame
     odd = @gameModel.actualOdd
-    @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s, @gameModel.getGameTime)
+    @gameView.readGame(@gameModel.getGameId, @gameModel.getGameCreator,
+                       @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult,
+                       odd.to_s, @gameModel.getGameTime, @gameModel.getClosedToBet, @gameModel.getFinished)
   end
 
   #TODO ver o que posso editar
@@ -134,7 +133,7 @@ class ControllerGame
       @gameModel.setResult = result
       @gameView.successGameEndedToBet
     end
-    end
+  end
 
   def listOddsGame
       @gameView.printOdds(@gameModel.getOdds)

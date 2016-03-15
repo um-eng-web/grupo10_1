@@ -18,6 +18,7 @@ module Subject
     @observers.delete(observer)
   end
 
+  #TODO talvez faça sentido criar um notifyUser e notifyBookie - ja se discute isso
   def notifyObservers(result, updateString)
     @observers.each do |observer|
       observer.update(result, updateString)
