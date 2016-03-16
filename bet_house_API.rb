@@ -201,10 +201,12 @@ class BetHouseAPI
     if @games.has_key?(temp)
       if @games[temp].getFinished
         @games[temp].updateGameFinished(bookiename)
+        @games[temp].notObservers(temp, "Game Updated", "nulo", "O jogo #{temp} foi editado por #{bookiename}")
       elsif @games[temp].getClosedToBet
         @betHouseView.throwUnavailableGame
       else
         @games[temp].updateGameOpen (bookiename)
+        @games[temp].notObservers(temp, "Game Updated", "nulo", "O jogo #{temp} foi editado por #{bookiename}")
       end
     else
       @betHouseView.throwGameToCloseNotExists
@@ -225,6 +227,7 @@ class BetHouseAPI
     temp = @betHouseView.gameClosetoBet
     if @games.has_key?(temp)
       @games[temp].gameClosedToBet
+      @games[temp].notObservers(temp, "Closed To Bet", "nulo", "Já não é possível apostar no jogo #{temp}. ClosedToBet ativado.")
     else
       @betHouseView.throwGameToCloseNotExists
     end
@@ -246,7 +249,6 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar
   def removeGame(bookie)
     showActiveGames
     temp = @betHouseView.gameDelete

@@ -5,15 +5,15 @@ require_relative '../observer'
 
 class ControllerUser < Observer
 
-  #instance variables
+  @@notificationId
   @userModel
   @userView
 
-  #TODO transaction methods
 
   def initialize
-      @userModel = User.new
-      @userView = ViewUser.new
+    @@notificationId = 1
+    @userModel = User.new
+    @userView = ViewUser.new
   end
 
   #accessors
@@ -166,9 +166,9 @@ class ControllerUser < Observer
   end
 
   def update(gameId, type, result, updateString)
-    #TODO mudar o id da notificaçao
-    notification = Notification.new(0, type, updateString, false)
-    @userModel.insertNotification(notification)
+    notification = Notification.new(@@notificationId, type, updateString, false)
+    @userModel.insertNotification(@@notificationId, notification)
+    @@notificationId += 1
   end
 
 

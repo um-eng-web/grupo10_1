@@ -6,7 +6,6 @@ class User
 
   #instance variables
   @@betId
-  @@notificationId
   @username
   @password
   @name
@@ -22,7 +21,6 @@ class User
   #initialize method
   def initialize
     @@betId = 0
-    @@notificationId = 0
     @username = nil
     @password = nil
     @name = nil
@@ -199,9 +197,8 @@ class User
     }
   end
 
-  def insertNotification(notification)
-    @notifications[@@notificationId] = notification
-    @@notificationId+= 1
+  def insertNotification(id, notification)
+    @notifications[id] = notification
   end
 
 

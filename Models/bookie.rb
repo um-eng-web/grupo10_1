@@ -4,7 +4,6 @@ require_relative '../Models/notification'
 class Bookie
 
   #instance variables
-  @@notificationGlobalId
   @bookieName
   @password
   @logged
@@ -15,7 +14,6 @@ class Bookie
 
   #initialize
   def initialize
-    @@notificationGlobalId = 0
     @bookieName = nil
     @password = nil
     @logged = false
@@ -97,9 +95,8 @@ class Bookie
     @followingGames.delete(gameId)
   end
 
-  def insertNotification(notification)
-    @notifications[@@notificationGlobalId] = notification
-    @@notificationGlobalId += 1
+  def insertNotification(id, notification)
+    @notifications[id] = notification
   end
 
 

@@ -62,7 +62,6 @@ class Menu
     puts "7- Transact BetCoins"
     puts "8- Change Password"
     puts "9- Logout"
-    puts "10- Show Game Observers"
 
     option = gets.to_i
     case option
@@ -92,10 +91,6 @@ class Menu
         menuUser(username)
       when 9
         @house.userLogout(username)
-        menuAuthReg
-
-      when 10
-        @house.getGameObservers
         menuAuthReg
       else
         puts"Invalid Option"

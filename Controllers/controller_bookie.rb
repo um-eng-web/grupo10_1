@@ -4,11 +4,12 @@ require_relative '../observer'
 require_relative '../Models/notification'
 
 class ControllerBookie < Observer
-
+  @@notificationId
   @bookieModel
   @bookieView
 
   def initialize
+    @@notificationId = 1
     @bookieModel = Bookie.new
     @bookieView = ViewBookie.new
   end
@@ -111,10 +112,9 @@ class ControllerBookie < Observer
 
 
   def update(gameId, type, result, updateString)
-    #TODO mudar o id da notificaçao
-    notification = Notification.new(0, type, updateString, false)
-    @bookieModel.insertNotification(notification)
-
+    notification = Notification.new(@@notificationId, type, updateString, false)
+    @bookieModel.insertNotification(@@notificationId, notification)
+    @@notificationId += 1
   end
 
   def showUnreadedNotifications
