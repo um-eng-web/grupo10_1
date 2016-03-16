@@ -334,4 +334,7 @@ class BetHouseAPI
     @users[username].showNotifications
   end
 
+  def showBookieNotifications(bookiename)
+    @bookies[bookiename].showNotifications
+  end
 end

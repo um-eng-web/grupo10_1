@@ -167,7 +167,7 @@ class ControllerUser < Observer
 
   #TODO fazer isto
   def update(gameId, result, updateString)
-
+    #nao ta acabado
     newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
     @userModel.insertNotification(newNotification)
   end
