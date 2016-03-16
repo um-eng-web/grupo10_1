@@ -5,7 +5,7 @@ class ViewBet
     return gets.chomp
   end
 
-  #TODO passar o game como string e nao a classe
+
   def readBet(betId, gameId, game, type, betAmount, state, result)
     puts "BetId: #{betId}"
     puts "GameId: #{gameId}"

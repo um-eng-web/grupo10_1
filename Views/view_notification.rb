@@ -8,5 +8,4 @@ class ViewNotification
     puts "Readed: #{readed}\n"
   end
 
-
 end

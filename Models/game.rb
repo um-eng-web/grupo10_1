@@ -13,7 +13,6 @@ class Game
   @closedToBet  #boolean para dizer se esta aberto ou fechado para apostar
 
 
-  #TODO ajustar o tamanho do array
   def initialize
     @gameId = nil
     @gameCreator = nil

@@ -45,10 +45,6 @@ class BetHouseAPI
     @betHouseView
   end
 
-  #TODO notificaçoes
-  #TODO update do obeserver pattern
-
-
 
   #USERS INTERFACE
   def registerUser
@@ -133,7 +129,7 @@ class BetHouseAPI
     @games[gId].getObs
   end
 
-  #TODO falta remover observer
+
   def unfollowGameUser(username)
     @users[username].unfollowGame
   end
@@ -272,7 +268,7 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar
+
   def chooseGameToUnfollow(bookiename)
     showFollowingGamesBookie(bookiename)
     game = @betHouseView.chooseGameId.to_i

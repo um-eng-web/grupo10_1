@@ -153,14 +153,13 @@ class ControllerGame
     registerObserver(bookiename)
   end
 
-  #Observer pattern method
-  #TODO falta testar
+
   def remObserver(bookiename)
     index = @observers.index(bookiename)
     removeObserver(index)
   end
 
-  #TODO acabar isto
+
   def notObservers(gameId, type, result, string)
     notifyObservers(gameId, type, result, string)
   end
