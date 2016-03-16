@@ -1,5 +1,6 @@
 require_relative '../Controllers/controller_game'
 require_relative '../Controllers/controller_bet'
+require_relative '../Models/notification'
 
 class User
 
@@ -38,6 +39,7 @@ class User
     @transactionHistory = Hash.new
     @transactionHistory.default = "Transaction undefined."
     @notifications = Hash.new
+    @notifications.default = Notification
   end
 
   #accessor's methods (getters)

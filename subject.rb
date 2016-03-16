@@ -19,9 +19,9 @@ module Subject
   end
 
   #TODO talvez faça sentido criar um notifyUser e notifyBookie - ja se discute isso
-  def notifyObservers(gameId, result, updateString)
+  def notifyObservers(gameId, type, result, updateString)
     @observers.each do |observer|
-      observer.update(gameId, result, updateString)
+      observer.update(gameId, type, result, updateString)
     end
   end
 

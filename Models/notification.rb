@@ -5,11 +5,11 @@ class Notification
   @body
   @readed
 
-  def initialize
-    @notificationId = nil
-    @type = nil
-    @body = nil
-    @readed = false
+  def initialize(id, type, body, readed)
+    @notificationId = id
+    @type = type
+    @body = body
+    @readed = readed
   end
 
   def getNotificationId
@@ -44,6 +44,13 @@ class Notification
     @readed = bool
   end
 
+  def to_s
+    puts "\nNotification:"
+    puts "ID: #{@notificationId}"
+    puts "Type: #{@type}"
+    puts "Body: #{@body}"
+    puts "Readed: #{@readed}"
+  end
 
 
 end

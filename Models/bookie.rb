@@ -1,4 +1,5 @@
 require_relative '../Controllers/controller_game'
+require_relative '../Models/notification'
 
 class Bookie
 
@@ -23,6 +24,7 @@ class Bookie
     @followingGames = Hash.new
     @followingGames.default = ControllerGame
     @notifications = Hash.new
+    @notifications.default = Notification
   end
 
 

@@ -76,8 +76,7 @@ class Menu
         @house.unfollowGameUser(username)
         menuUser(username)
       when 4
-        #TODO
-        @house.showUserNotifications(username)
+        @house.showUserNotificationsUnreaded(username)
         menuUser(username)
       when 5
         listMenuUser(username)
@@ -109,7 +108,7 @@ class Menu
     puts "1- List Active Games"
     puts "2- List Active Bets"
     puts "3- List Following Games"
-    puts "4- List All Notifications"
+    puts "4- List Notifications History"
     puts "5- List Bet History"
     puts "0- Back"
 
@@ -125,8 +124,7 @@ class Menu
         @house.showFollowingGamesUser(username)
         listMenuUser(username)
       when 4
-        #TODO
-        @house.showUserNotifications(username)
+        @house.showUserNotificationsReaded(username)
         listMenuUser(username)
       when 5
         @house.showBetsHistoryUser(username)
@@ -165,7 +163,7 @@ class Menu
         @house.gameEnded
         menuBookie(bookiename)
       when 4
-        @house.showBookieNotifications(bookiename)
+        @house.showBookieNotificationsUnreaded(bookiename)
         menuBookie(bookiename)
       when 5
         @house.gameUpdate (bookiename)
@@ -203,7 +201,7 @@ class Menu
     puts "5- List Game's Odds History"
     puts "6- List Online Users"
     puts "7- List All Users"
-    puts "8- List Notifications"
+    puts "8- List Notifications History"
     puts "0- Back"
 
     option = gets.to_i
@@ -227,12 +225,10 @@ class Menu
         @house.showOnlineUsers
         listMenuBookie(bookiename)
       when 7
-        #all users
         @house.showAllUsers
         listMenuBookie(bookiename)
       when 8
-        #TODO
-        @house.showBookieNotifications(bookiename)
+        @house.showBookieNotificationsReaded(bookiename)
         listMenuBookie(bookiename)
       when 0
         menuBookie(bookiename)

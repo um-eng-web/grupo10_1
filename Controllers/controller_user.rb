@@ -1,6 +1,6 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
-require 'net/smtp'
+require_relative '../Models/notification'
 require_relative '../observer'
 
 class ControllerUser < Observer
@@ -165,11 +165,10 @@ class ControllerUser < Observer
     @userView.loggedOut
   end
 
-  #TODO fazer isto
-  def update(gameId, result, updateString)
-    #nao ta acabado
-    newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
-    @userModel.insertNotification(newNotification)
+  def update(gameId, type, result, updateString)
+    #TODO mudar o id da notificaçao
+    notification = Notification.new(0, type, updateString, false)
+    @userModel.insertNotification(notification)
   end
 
 
@@ -177,9 +176,23 @@ class ControllerUser < Observer
     @userModel.endGameUpdateOpenBets(gameId, result)
   end
 
-  def showNotifications
+  def showUnreadedNotifications
     nots = @userModel.getNotifications
-    nots.each_value {|value| puts "#{value.to_s}"}
+    nots.each_value {|value|
+      if(value.getReaded == false)
+        puts "#{value.to_s}"
+        value.setReaded=true
+      end
+    }
+  end
+
+  def showReadedNotifications
+    nots = @userModel.getNotifications
+    nots.each_value {|value|
+      if(value.getReaded == true)
+        puts "#{value.to_s}"
+      end
+    }
   end
 
 end

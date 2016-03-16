@@ -1,6 +1,7 @@
 require_relative '../Models/bookie'
 require_relative '../Views/view_bookie'
 require_relative '../observer'
+require_relative '../Models/notification'
 
 class ControllerBookie < Observer
 
@@ -109,15 +110,30 @@ class ControllerBookie < Observer
   end
 
 
-  def update(gameId, result, updateString)
-    #nao ta acabado
-    newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
-    @bookieModel.insertNotification(newNotification)
+  def update(gameId, type, result, updateString)
+    #TODO mudar o id da notificaçao
+    notification = Notification.new(0, type, updateString, false)
+    @bookieModel.insertNotification(notification)
+
   end
 
-  def showNotifications
+  def showUnreadedNotifications
     nots = @bookieModel.getNotifications
-    nots.each_value {|value| puts "#{value.to_s}"}
+    nots.each_value {|value|
+      if(value.getReaded == false)
+          puts "#{value.to_s}"
+          value.setReaded=true
+      end
+      }
+  end
+
+  def showReadedNotifications
+    nots = @bookieModel.getNotifications
+    nots.each_value {|value|
+      if(value.getReaded == true)
+        puts "#{value.to_s}"
+      end
+    }
   end
 
 
