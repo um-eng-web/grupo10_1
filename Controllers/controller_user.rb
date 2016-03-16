@@ -1,6 +1,6 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
-require_relative '../Models/notification'
+require_relative '../Controllers/controller_notification'
 require_relative '../observer'
 
 class ControllerUser < Observer
@@ -166,7 +166,8 @@ class ControllerUser < Observer
   end
 
   def update(gameId, type, result, updateString)
-    notification = Notification.new(@@notificationId, type, updateString, false)
+    notification = ControllerNotification.new
+    notification.createNotification(@@notificationId, type, updateString, false)
     @userModel.insertNotification(@@notificationId, notification)
     @@notificationId += 1
   end
@@ -179,8 +180,8 @@ class ControllerUser < Observer
   def showUnreadedNotifications
     nots = @userModel.getNotifications
     nots.each_value {|value|
-      if(value.getReaded == false)
-        puts "#{value.to_s}"
+      if(value.getReadedBool == false)
+        puts value.readNotification
         value.setReaded=true
       end
     }
@@ -189,8 +190,8 @@ class ControllerUser < Observer
   def showReadedNotifications
     nots = @userModel.getNotifications
     nots.each_value {|value|
-      if(value.getReaded == true)
-        puts "#{value.to_s}"
+      if(value.getReadedBool == true)
+        puts value.readNotification
       end
     }
   end

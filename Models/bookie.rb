@@ -1,5 +1,5 @@
 require_relative '../Controllers/controller_game'
-require_relative '../Models/notification'
+require_relative '../Controllers/controller_notification'
 
 class Bookie
 
@@ -22,7 +22,7 @@ class Bookie
     @followingGames = Hash.new
     @followingGames.default = ControllerGame
     @notifications = Hash.new
-    @notifications.default = Notification
+    @notifications.default = ControllerNotification
   end
 
 
@@ -50,11 +50,6 @@ class Bookie
   def getNotifications
     @notifications
   end
-
-  def getNotificationGlobalId
-    @@notificationGlobalId
-  end
-
 
   #setters
   def setBookieName=(name)

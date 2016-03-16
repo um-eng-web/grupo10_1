@@ -40,4 +40,12 @@ class ControllerNotification
                 @notificationModel.getBody, @notificationModel.getReaded)
   end
 
+  def getReadedBool
+    return @notificationModel.getReaded
+  end
+
+  def setReaded=(boolean)
+    @notificationModel.setReaded = boolean
+  end
+
 end
