@@ -1,0 +1,2 @@
+class ControllerNotification
+end

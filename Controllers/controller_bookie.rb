@@ -28,7 +28,6 @@ class ControllerBookie < Observer
     @bookieView = view
   end
 
-  #TODO testar isto
   #CRUD methods
   def createBookie
     temp = @bookieView.createBookie
@@ -53,7 +52,6 @@ class ControllerBookie < Observer
   end
 
 
-  #TODO testar isto
   #create game method
   def createGame(gameId)
     newGame = ControllerGame.new
@@ -112,7 +110,14 @@ class ControllerBookie < Observer
 
 
   def update(gameId, result, updateString)
-    puts "FUI NOTIICADO ===> #{updateString}"
+    #nao ta acabado
+    newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
+    @bookieModel.insertNotification(newNotification)
+  end
+
+  def showNotifications
+    nots = @bookieModel.getNotifications
+    nots.each_value {|value| puts "#{value.to_s}"}
   end
 
 

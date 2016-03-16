@@ -165,14 +165,12 @@ class Menu
         @house.gameEnded
         menuBookie(bookiename)
       when 4
-        #notifications
+        @house.showBookieNotifications(bookiename)
         menuBookie(bookiename)
       when 5
-        #pus apenas o active games, nao faz sentido mudar um jogo que esta no hitorico
         @house.gameUpdate (bookiename)
         menuBookie(bookiename)
       when 6
-        #pus apenas o active games, nao faz sentido remover um jogo que esta no hitorico
         @house.removeGame (bookiename)
         menuBookie(bookiename)
       when 7
@@ -234,7 +232,7 @@ class Menu
         listMenuBookie(bookiename)
       when 8
         #TODO
-        #notifications
+        @house.showBookieNotifications(bookiename)
         listMenuBookie(bookiename)
       when 0
         menuBookie(bookiename)
