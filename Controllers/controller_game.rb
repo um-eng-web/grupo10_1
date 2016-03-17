@@ -133,19 +133,11 @@ class ControllerGame
   end
 
   def gamesUnfollowBookie(bookiename)
-    if @gameModel.getObservers.include?(bookiename)
-      return false
-    else
-      return true
-    end
+    !@gameModel.getObservers.include?(bookiename)
   end
 
   def gamesFollowBookie(bookiename)
-    if @gameModel.getObservers.include?(bookiename)
-      return true
-    else
-      return false
-    end
+    @gameModel.getObservers.include?(bookiename)
   end
 
   #Observer Pattern method
