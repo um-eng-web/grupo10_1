@@ -56,7 +56,6 @@ class ControllerGame
                        odd.to_s, @gameModel.getGameTime, @gameModel.getClosedToBet, @gameModel.getFinished)
   end
 
-  #TODO ver o que posso editar
   def updateGameOpen (creator)
     insertOdd(creator)
   end
@@ -72,14 +71,12 @@ class ControllerGame
     @gameView.deleteGame(@gameModel.getGameId, @gameModel.getGameCreator, @gameModel.getTeam1, @gameModel.getTeam2, @gameModel.getResult, odd.to_s)
   end
 
-  #method to insert an odd into an array of game odds
   def insertOdd (creator)
     newOdd = ControllerOdd.new
     newOdd.createOdd (creator)
     @gameModel.insertOdd(newOdd)
   end
 
-  #method to remove an odd from an array of game odds
   def removeOdd
     arrayOdd = @gameModel.getOdds
     removeIndex = @gameView.printOddArray(arrayOdd)
@@ -88,8 +85,6 @@ class ControllerGame
     @gameModel.removeOdd(removeIndex)
   end
 
-  #method to get the value of the bet
-  #TODO corrigir else
   def getSelectedOdd(oddType)
     mostRecent = @gameModel.actualOdd
     if(oddType == "1"|| oddType == "X" || oddType == "2")
@@ -158,16 +153,15 @@ class ControllerGame
     registerObserver(bookiename)
   end
 
-  #Observer pattern method
-  #TODO falta testar
+
   def remObserver(bookiename)
     index = @observers.index(bookiename)
     removeObserver(index)
   end
 
-  #TODO acabar isto
-  def notObservers(gameId, result, string)
-    notifyObservers(gameId, result, string)
+
+  def notObservers(gameId, type, result, string)
+    notifyObservers(gameId, type, result, string)
   end
 
 end

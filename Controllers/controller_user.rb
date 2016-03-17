@@ -1,19 +1,19 @@
 require_relative '../Models/user'
 require_relative '../Views/view_user'
-require 'net/smtp'
+require_relative '../Controllers/controller_notification'
 require_relative '../observer'
 
 class ControllerUser < Observer
 
-  #instance variables
+  @@notificationId
   @userModel
   @userView
 
-  #TODO transaction methods
 
   def initialize
-      @userModel = User.new
-      @userView = ViewUser.new
+    @@notificationId = 1
+    @userModel = User.new
+    @userView = ViewUser.new
   end
 
   #accessors
@@ -165,11 +165,11 @@ class ControllerUser < Observer
     @userView.loggedOut
   end
 
-  #TODO fazer isto
-  def update(gameId, result, updateString)
-    #nao ta acabado
-    newNotification = "NOTIFICATION (#{gameId}):\n#{updateString}"
-    @userModel.insertNotification(newNotification)
+  def update(gameId, type, result, updateString)
+    notification = ControllerNotification.new
+    notification.createNotification(@@notificationId, type, updateString, false)
+    @userModel.insertNotification(@@notificationId, notification)
+    @@notificationId += 1
   end
 
 
@@ -177,9 +177,23 @@ class ControllerUser < Observer
     @userModel.endGameUpdateOpenBets(gameId, result)
   end
 
-  def showNotifications
+  def showUnreadedNotifications
     nots = @userModel.getNotifications
-    nots.each_value {|value| puts "#{value.to_s}"}
+    nots.each_value {|value|
+      if(value.getReadedBool == false)
+        puts value.readNotification
+        value.setReaded=true
+      end
+    }
+  end
+
+  def showReadedNotifications
+    nots = @userModel.getNotifications
+    nots.each_value {|value|
+      if(value.getReadedBool == true)
+        puts value.readNotification
+      end
+    }
   end
 
 end

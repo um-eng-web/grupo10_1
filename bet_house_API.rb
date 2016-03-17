@@ -45,10 +45,6 @@ class BetHouseAPI
     @betHouseView
   end
 
-  #TODO notificaçoes
-  #TODO update do obeserver pattern
-
-
 
   #USERS INTERFACE
   def registerUser
@@ -133,7 +129,7 @@ class BetHouseAPI
     @games[gId].getObs
   end
 
-  #TODO falta remover observer
+
   def unfollowGameUser(username)
     @users[username].unfollowGame
   end
@@ -201,10 +197,12 @@ class BetHouseAPI
     if @games.has_key?(temp)
       if @games[temp].getFinished
         @games[temp].updateGameFinished(bookiename)
+        @games[temp].notObservers(temp, "Game Updated", "nulo", "O jogo #{temp} foi editado por #{bookiename}")
       elsif @games[temp].getClosedToBet
         @betHouseView.throwUnavailableGame
       else
         @games[temp].updateGameOpen (bookiename)
+        @games[temp].notObservers(temp, "Game Updated", "nulo", "O jogo #{temp} foi editado por #{bookiename}")
       end
     else
       @betHouseView.throwGameToCloseNotExists
@@ -225,6 +223,7 @@ class BetHouseAPI
     temp = @betHouseView.gameClosetoBet
     if @games.has_key?(temp)
       @games[temp].gameClosedToBet
+      @games[temp].notObservers(temp, "Closed To Bet", "nulo", "Já não é possível apostar no jogo #{temp}. ClosedToBet ativado.")
     else
       @betHouseView.throwGameToCloseNotExists
     end
@@ -239,14 +238,13 @@ class BetHouseAPI
       @users.each_value {|value| value.endGameUpdate(temp, result)}
 
 
-      @games[temp].notObservers(temp, result, "O jogo #{temp} acabou e o resultado final foi #{result}")
+      @games[temp].notObservers(temp, "Game Ended",result, "O jogo #{temp} acabou e o resultado final foi #{result}")
       @games[temp].endGame(result)
     else
       @betHouseView.throwGameToCloseNotExists
     end
   end
 
-  #TODO testar
   def removeGame(bookie)
     showActiveGames
     temp = @betHouseView.gameDelete
@@ -270,7 +268,7 @@ class BetHouseAPI
     end
   end
 
-  #TODO testar
+
   def chooseGameToUnfollow(bookiename)
     showFollowingGamesBookie(bookiename)
     game = @betHouseView.chooseGameId.to_i
@@ -330,11 +328,19 @@ class BetHouseAPI
     @users.each_value{|value| value.readUser}
   end
 
-  def showUserNotifications(username)
-    @users[username].showNotifications
+  def showUserNotificationsReaded(username)
+    @users[username].showReadedNotifications
   end
 
-  def showBookieNotifications(bookiename)
-    @bookies[bookiename].showNotifications
+  def showUserNotificationsUnreaded(username)
+    @users[username].showUnreadedNotifications
+  end
+
+  def showBookieNotificationsReaded(bookiename)
+    @bookies[bookiename].showReadedNotifications
+  end
+
+  def showBookieNotificationsUnreaded(bookiename)
+    @bookies[bookiename].showUnreadedNotifications
   end
 end

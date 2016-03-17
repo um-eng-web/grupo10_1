@@ -43,7 +43,4 @@ class Notification
   def setReaded=(bool)
     @readed = bool
   end
-
-
-
 end

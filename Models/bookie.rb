@@ -1,9 +1,9 @@
 require_relative '../Controllers/controller_game'
+require_relative '../Controllers/controller_notification'
 
 class Bookie
 
   #instance variables
-  @@notificationGlobalId
   @bookieName
   @password
   @logged
@@ -14,7 +14,6 @@ class Bookie
 
   #initialize
   def initialize
-    @@notificationGlobalId = 0
     @bookieName = nil
     @password = nil
     @logged = false
@@ -23,6 +22,7 @@ class Bookie
     @followingGames = Hash.new
     @followingGames.default = ControllerGame
     @notifications = Hash.new
+    @notifications.default = ControllerNotification
   end
 
 
@@ -50,11 +50,6 @@ class Bookie
   def getNotifications
     @notifications
   end
-
-  def getNotificationGlobalId
-    @@notificationGlobalId
-  end
-
 
   #setters
   def setBookieName=(name)
@@ -95,9 +90,8 @@ class Bookie
     @followingGames.delete(gameId)
   end
 
-  def insertNotification(notification)
-    @notifications[@@notificationGlobalId] = notification
-    @@notificationGlobalId += 1
+  def insertNotification(id, notification)
+    @notifications[id] = notification
   end
 
 

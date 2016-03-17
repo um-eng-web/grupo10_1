@@ -45,7 +45,6 @@ class ControllerOdd
   end
 
 
-  #TODO ver o que posso editar
   def updateOdd
     temp = @oddView.updateOdd
     array = temp.split(":")
